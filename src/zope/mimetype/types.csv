@@ -1,0 +1,59 @@
+name, title, extensions, mime_types, icon_name, encoded
+IContentTypeMicrosoftWord, MS Word, .doc .dot, application/msword application/vnd.ms-word, icons/ms-word.gif, no
+IContentTypeMicrosoftExcel, MS Excel, .xls .xlt, application/vnd.ms-excel, icons/ms-excel.gif, no
+IContentTypeCSV, Comma Separated Values, .csv, text/comma-separated-values, icons/document.gif, yes
+IContentTypeTabDelimited, Tab Delimited, .tab .tsv, text/tab-separated-values, icons/document.gif, yes
+IContentTypeMicrosoftPowerPoint, MS Powerpoint, .ppt, application/vnd.ms-powerpoint, icons/ms-powerpoint.gif, no
+IContentTypeMicrosoftProject, MS Project, .mpp, application/vnd.ms-project, icons/ms-project.gif, no
+IContentTypeMicrosoftWorks, MS Works, .wps .wdb, application/vnd.ms-works, icons/document.gif, no
+IContentTypeMicrosoftVisio, MS Visio, .vsd .vst .vsw, application/x-visio application/vnd.ms-visio, icons/document.gif, no
+IContentTypeWordPerfect, WordPerfect, .wpd .wp5 .wp6, application/wordperfect, icons/wordperfect.gif, no
+IContentTypeRichText, Rich Text Format, .rtf, application/rtf, icons/document.gif, no
+IContentTypeTextPlain, Plain Text, .txt .text, text/plain, icons/document.gif, yes
+IContentTypeTextHtml, HTML Document, .html .htm, text/html, icons/html.gif, yes
+IContentTypeHtmlApplication, HTML Application, .hta, application/hta, icons/binary.gif, yes
+IContentTypeEmail, Email message (MIME), .mime, message/rfc822, icons/document.gif, yes
+IContentTypeXml, XML Document, .xml .xsl .xslt, text/xml application/xml, icons/xml.gif, yes
+IContentTypeXhtml, XHTML Document, .html .xhtml, application/xhtml+xml, icons/html.gif, yes
+IContentTypeXmlDtd, XML Document Type Definition, .dtd, application/xml-dtd, icons/xml.gif, yes
+IContentTypeXmlExternalEntity, XML External Parsed Entity, .xml, application/xml-external-parsed-entity text/xml-external-parsed-entity, icons/xml.gif, yes
+IContentTypeSgml, SGML Document, .sgm .sgml, text/sgml, icons/document.gif, yes
+IContentTypeCss, Cascading Style Sheet, .css, text/css, icons/css.gif, yes
+IContentTypeJavaScript, Javascript Program, .js .ls, text/javascript, icons/javascript.gif, yes
+IContentTypeImageGif, GIF Image, .gif, image/gif, icons/image.gif, no
+IContentTypeImageJpeg, JPEG Image, .jpg .jpeg .jpe, image/jpeg image/pjpeg, icons/image.gif, no
+IContentTypeImagePng, PNG Image, .png, image/x-png, icons/image.gif, no
+IContentTypeImageTiff, TIFF Image, .tif .tiff, image/tiff, icons/image.gif, no
+IContentTypeImageBitmap, MS Bitmap Image, .bmp, image/bmp, icons/image.gif, no
+IContentTypeImageMacintoshPicture, Macintosh Picture, .pict, image/x-pict, icons/image.gif, no
+IContentTypeImageMicrosoftIcon, MS Icon, .ico .icl, image/x-icon, icons/image.gif, no
+IContentTypeImagePhotoCd, Kodak Photo CD, .pcd .jpeg, image/x-folder-cd, icons/image.gif, no
+IContentTypeImageAutoCad, AutoCAD Drawing, .dwg, image/vnd.dwg, icons/image.gif, no
+IContentTypeAudioWave, Wave Audio, .wav, audio/x-wav, icons/sound.gif, no
+IContentTypeAudioMpeg3, MPEG Audio (MP3), .mpa .abs .mpega .mp3, audio/x-mpeg, icons/sound.gif, no
+IContentTypeAudioMpeg2, MPEG2 Audio, .mp2a .mpa2, audio/x-mpeg-2, icons/sound.gif, no
+IContentTypeAudioRealAudio, RealAudio, .ra .ram, application/x-pn-realaudio, icons/sound.gif, no
+IContentTypeRealMedia, RealMedia, .rm, application/vnd.rn-realmedia, icons/video.png, no
+IContentTypeAudioAiff, Audio Interchange Format, .aif .aiff .aifc, audio/x-aiff, icons/sound.gif, no
+IContentTypeAudioMidi, Midi Audio, .mid .midi, audio/x-midi, icons/sound.gif, no
+IContentTypeVideoMpeg, MPEG Video, .mpeg .mpg .mpe, video/mpeg, icons/video.png, no
+IContentTypeVideoMpeg2, MPEG2 Video, .mpv2 .mp2v, video/mpeg-2, icons/video.png, no
+IContentTypeVideoQuickTime, Quicktime Video, .mov .moov, video/quicktime, icons/video.png, no
+IContentTypeVideoAvi, MS AVI Video, .avi , video/x-msvideo, icons/video.png, no
+IContentTypePdf, Adobe Acrobat PDF, .pdf, application/pdf, icons/pdf.gif, no
+IContentTypePostscript, Postscript, .ps .ai .eps, application/postscript, icons/document.gif, yes
+IContentTypeZip, Zip Archive, .zip, application/zip, icons/archive.png, no
+IContentTypeTarGzip, Tar/Gzip Archive, .tar.gz .tgz, application/x-compressed, icons/archive.png, no
+IContentTypeGzip, Gzip Archive, .gz .gzip, application/x-gzip, icons/archive.png, no
+IContentTypeBzip2, Bzip Archive, .bz2, application/x-bzip2, icons/archive.png, no
+IContentTypeStuffit, Stuffit Archive, .sit .sea, application/x-stuffit, icons/archive.png, no
+IContentTypeBinHex, BinHex Archive, .hqx, application/mac-binhex40, icons/archive.png, no
+IContentTypeBinary, Binary/Executable, .bin .uu .exe, application/octet-stream, icons/binary.gif, no
+IContentTypeOpenOfficeWriter, OpenOffice Writer, .sxw .sxg, application/vnd.sun.xml.writer, icons/oo-writer.png, no
+IContentTypeOpenOfficeWriterTemplate, OpenOffice Writer Template, .sxw, application/vnd.sun.xml.writer.template, icons/oo-writer.png, no
+IContentTypeOpenOfficeCalc, OpenOffice Calc, .sxc, application/vnd.sun.xml.calc, icons/oo-calc.png, no
+IContentTypeOpenOfficeCalcTemplate, OpenOffice Calc, .stc, application/vnd.sun.xml.calc.template, icons/oo-calc.png, no
+IContentTypeOpenOfficeDraw, OpenOffice Draw, .sxd .std, application/vnd.sun.xml.draw, icons/oo-draw.png, no
+IContentTypeOpenOfficeImpress, OpenOffice Impress, .sxi .sti, application/vnd.sun.xml.impress, icons/oo-impress.png, no
+IContentTypeStarOfficeWriter, StarOffice Writer, .sdw .sgl, application/vnd.stardivision.writer, icons/document.gif, no
+IContentTypeStarOfficeCalc, StarOffice Calc, .sdc, application/vnd.stardivision.calc, icons/document.gif, no

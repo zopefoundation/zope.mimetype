@@ -1,0 +1,213 @@
+======================================
+MIME type and character set extraction
+======================================
+
+The `zope.mimetype.typegetter` module provides a selection of MIME
+type extractors and charset extractors.  These may be used to
+determine what the MIME type and character set for uploaded data
+should be.
+
+These two interfaces represent the site policy regarding interpreting
+upload data in the face of missing or inaccurate input.
+
+Let's go ahead and import the module::
+
+  >>> from zope.mimetype import typegetter
+
+MIME types
+----------
+
+There are a number of interesting MIME-type extractors:
+
+`mimeTypeGetter()`
+  A minimal extractor that never attempts to guess.
+
+`mimeTypeGuesser()`
+  An extractor that tries to guess the content type based on the name
+  and data if the input contains no content type information.
+
+`smartMimeTypeGuesser()`
+  An extractor that checks the content for a variety of constructs to
+  try and refine the results of the `mimeTypeGuesser()`.  This is able
+  to do things like check for XHTML that's labelled as HTML in upload
+  data.
+
+
+`mimeTypeGetter()`
+~~~~~~~~~~~~~~~~~~
+
+We'll start with the simplest, which does no content-based guessing at
+all, but uses the information provided by the browser directly.  If
+the browser did not provide any content-type information, or if it
+cannot be parsed, the extractor simply asserts a "safe" MIME type of
+application/octet-stream.  (The rationale for selecting this type is
+that since there's really nothing productive that can be done with it
+other than download it, it's impossible to mis-interpret the data.)
+
+When there's no information at all about the content, the extractor
+returns None::
+
+  >>> print typegetter.mimeTypeGetter()
+  None
+
+Providing only the upload filename or data, or both, still produces
+None, since no guessing is being done::
+
+  >>> print typegetter.mimeTypeGetter(name="file.html")
+  None
+
+  >>> print typegetter.mimeTypeGetter(data="<html>...</html>")
+  None
+
+  >>> print typegetter.mimeTypeGetter(
+  ...     name="file.html", data="<html>...</html>")
+  None
+
+If a content type header is available for the input, that is used
+since that represents explicit input from outside the application
+server.  The major and minor parts of the content type are extracted
+and returned as a single string::
+
+  >>> typegetter.mimeTypeGetter(content_type="text/plain")
+  'text/plain'
+
+  >>> typegetter.mimeTypeGetter(content_type="text/plain; charset=utf-8")
+  'text/plain'
+
+If the content-type information is provided but malformed (not in
+conformance with RFC 2822), it is ignored, since the intent cannot be
+reliably guessed::
+
+  >>> print typegetter.mimeTypeGetter(content_type="foo bar")
+  None
+
+This combines with ignoring the other values that may be provided as
+expected::
+
+  >>> print typegetter.mimeTypeGetter(
+  ...     name="file.html", data="<html>...</html>", content_type="foo bar")
+  None
+
+
+`mimeTypeGuesser()`
+~~~~~~~~~~~~~~~~~~~
+
+A more elaborate extractor that tries to work around completely
+missing information can be found as the `mimeTypeGuesser()` function.
+This function will only guess if there is no usable content type
+information in the input.  This extractor can be thought of as having
+the following pseudo-code::
+
+  def mimeTypeGuesser(name=None, data=None, content_type=None):
+      type = mimeTypeGetter(name=name, data=data, content_type=content_type)
+      if type is None:
+          type = guess the content type
+      return type
+
+Let's see how this affects the results we saw earlier.  When there's
+no input to use, we still get None::
+
+  >>> print typegetter.mimeTypeGuesser()
+  None
+
+Providing only the upload filename or data, or both, now produces a
+non-None guess for common content types::
+
+  >>> typegetter.mimeTypeGuesser(name="file.html")
+  'text/html'
+
+  >>> typegetter.mimeTypeGuesser(data="<html>...</html>")
+  'text/html'
+
+  >>> typegetter.mimeTypeGuesser(name="file.html", data="<html>...</html>")
+  'text/html'
+
+Note that if the filename and data provided separately produce
+different MIME types, the result of providing both will be one of
+those types, but which is unspecified::
+
+  >>> mt_1 = typegetter.mimeTypeGuesser(name="file.html")
+  >>> mt_1
+  'text/html'
+
+  >>> mt_2 = typegetter.mimeTypeGuesser(data="<?xml version='1.0'?>...")
+  >>> mt_2
+  'text/xml'
+
+  >>> mt = typegetter.mimeTypeGuesser(
+  ...     data="<?xml version='1.0'?>...", name="file.html")
+  >>> mt in (mt_1, mt_2)
+  True
+
+If a content type header is available for the input, that is used in
+the same way as for the `mimeTypeGetter()` function::
+
+  >>> typegetter.mimeTypeGuesser(content_type="text/plain")
+  'text/plain'
+
+  >>> typegetter.mimeTypeGuesser(content_type="text/plain; charset=utf-8")
+  'text/plain'
+
+If the content-type information is provided but malformed, it is
+ignored::
+
+  >>> print typegetter.mimeTypeGetter(content_type="foo bar")
+  None
+
+When combined with values for the filename or content data, those are
+still used to provide reasonable guesses for the content type::
+
+  >>> typegetter.mimeTypeGuesser(name="file.html", content_type="foo bar")
+  'text/html'
+
+  >>> typegetter.mimeTypeGuesser(
+  ...     data="<html>...</html>", content_type="foo bar")
+  'text/html'
+
+Information from a parsable content-type is still used even if a guess
+from the data or filename would provide a different or more-refined
+result::
+
+  >>> typegetter.mimeTypeGuesser(
+  ...     data="GIF89a...", content_type="application/octet-stream")
+  'application/octet-stream'
+
+
+`smartMimeTypeGuesser()`
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The `smartMimeTypeGuesser()` function applies more knowledge to the
+process of determining the MIME-type to use.  Essentially, it takes
+the result of the `mimeTypeGuesser()` function and attempts to refine
+the content-type based on various heuristics.
+
+We still see the basic behavior that no input produces None::
+
+  >>> print typegetter.smartMimeTypeGuesser()
+  None
+
+An unparsable content-type is still ignored::
+
+  >>> print typegetter.smartMimeTypeGuesser(content_type="foo bar")
+  None
+
+The interpretation of uploaded data will be different in at least some
+interesting cases.  For instance, the `mimeTypeGuesser()` function
+provides these results for some XHTML input data::
+
+  >>> typegetter.mimeTypeGuesser(
+  ...     data="<?xml version='1.0' encoding='utf-8'?><html>...</html>",
+  ...     name="file.html")
+  'text/html'
+
+The smart extractor is able to refine this into more usable data::
+
+  >>> typegetter.smartMimeTypeGuesser(
+  ...     data="<?xml version='1.0' encoding='utf-8'?>...",
+  ...     name="file.html")
+  'application/xhtml+xml'
+
+In this case, the smart extractor has refined the information
+determined from the filename using information from the uploaded
+data.  The specific approach taken by the extractor is not part of the
+interface, however.

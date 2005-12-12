@@ -1,0 +1,42 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="zope.mimetype">
+
+  <mimeTypes
+      module=".types"
+      file="types.csv"
+      />
+
+  <utility
+      provides=".interfaces.IMimeTypeGetter"
+      component=".typegetter.smartMimeTypeGuesser"
+      />
+
+  <utility
+      provides=".interfaces.ICharsetGetter"
+      component=".typegetter.charsetGetter"
+      />
+
+  <adapter factory=".contentinfo.ContentInfo"/>
+  <adapter factory=".source.CodecTerms"/>
+  <adapter factory=".source.ContentTypeTerms"/>
+
+  <view
+      type="zope.publisher.interfaces.browser.IBrowserRequest"
+      for="zope.schema.interfaces.IChoice
+           zope.mimetype.interfaces.ICodecSource"
+      provides="zope.app.form.interfaces.IInputWidget"
+      factory=".widget.TranslatableSourceDropdownWidget"
+      permission="zope.Public"
+      />
+
+  <view
+      type="zope.publisher.interfaces.browser.IBrowserRequest"
+      for="zope.schema.interfaces.IChoice
+           zope.mimetype.interfaces.IContentTypeSource"
+      provides="zope.app.form.interfaces.IInputWidget"
+      factory=".widget.TranslatableSourceDropdownWidget"
+      permission="zope.Public"
+      />
+
+</configure>

@@ -1,0 +1,147 @@
+##############################################################################
+#
+# Copyright (c) 2005 Zope Corporation and Contributors. All Rights Reserved.
+#
+# This software is subject to the provisions of the Zope Public License,
+# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+##############################################################################
+
+import os.path
+
+from zope import component
+from zope import interface
+from zope import schema
+from zope.configuration import fields
+from i18n import _
+
+from zope.mimetype import codec
+from zope.mimetype import interfaces
+from zope.mimetype import types
+
+import zope.app.component.interface
+import zope.app.publisher.browser.icon
+
+from zope.app.component import metaconfigure
+
+
+class IMimeTypesDirective(interface.Interface):
+    """Request loading of a MIME type definition table.
+
+    Example:
+
+      <zope:mimeDefinitions file='types.csv'/>
+
+    """
+
+    file = fields.Path(
+        title=_("File"),
+        description=_("Path of the CSV file to load registrations from."),
+        required=True,
+        )
+
+    module = fields.GlobalObject(
+        title=_("Module"),
+        description=_("Module which contains the interfaces"
+                      " referenced from the CSV file."),
+        required=True,
+        )
+
+
+def mimeTypesDirective(_context, file, module):
+    codec.initialize(_context)
+    directory = os.path.dirname(file)
+    data = types.read(file)
+    provides = interfaces.IContentTypeInterface
+    for name, info in data.iteritems():
+        iface = getattr(module, name, None)
+        if iface is None:
+            # create missing interface
+            iface = types.makeInterface(
+                name, info, getattr(module, "__name__", None))
+            setattr(module, name, iface)
+        # Register the interface as a utility:
+        _context.action(
+            discriminator = None,
+            callable = zope.app.component.interface.provideInterface,
+            args = (iface.__module__ + '.' + iface.getName(), iface)
+            )
+        for mime_type in info[2]:
+            # Register the interface as the IContentTypeInterface
+            # utility for each appropriate MIME type:
+            _context.action(
+                discriminator = ('utility', provides, mime_type),
+                callable = metaconfigure.handler,
+                args = ('provideUtility', provides, iface, mime_type),
+                )
+        icon = os.path.join(directory, info[3])
+        if icon and os.path.isfile(icon):
+            zope.app.publisher.browser.icon.IconDirective(
+                _context, "zmi_icon", iface, icon)
+            
+
+class ICodecDirective(interface.Interface):
+    """Defines a codec.
+
+    Example:
+
+       <zope:codec name="iso8859-1" title="Western (ISO-8859-1)">
+          ...
+       </zope:codec>
+    """
+
+    name = schema.ASCIILine(
+        title=_('Name'),
+        description=_('The name of the Python codec.'),
+        required=True,
+        )
+
+    title = fields.MessageID(
+        title=_('Title'),
+        description=_('The human-readable name for this codec.'),
+        required=False,
+        )
+
+class ICharsetDirective(interface.Interface):
+    """Defines a charset in a codec.
+
+    Example:
+
+       <charset name="iso8859-1" preferred="True" />
+       <charset name="latin1" />
+
+    """
+
+    name = schema.ASCIILine(
+        title=_('Name'),
+        description=_('The name of the Python codec.'),
+        required=True,
+        )
+
+    preferred = schema.Bool(
+        title=_('Preferred'),
+        description=_('Is this is the preferred charset for the encoding.'),
+        required=False,
+        )
+
+
+class CodecDirective(object):
+    def __init__(self, _context, name, title):
+        self.name = name
+        self.title = title
+        _context.action(
+            discriminator = None,
+            callable = codec.addCodec,
+            args = (name, title),
+            )
+
+    def charset(self, _context, name, preferred=False):
+        _context.action(
+            discriminator = (self.name, name),
+            callable = codec.addCharset,
+            args = (self.name, name, preferred),
+            )

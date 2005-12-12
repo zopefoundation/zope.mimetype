@@ -1,0 +1,28 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:meta="http://namespaces.zope.org/meta">
+
+
+  <meta:directives namespace="http://namespaces.zope.org/zope">
+
+    <meta:complexDirective
+        name="codec"
+        schema=".zcml.ICodecDirective"
+        handler=".zcml.CodecDirective">
+
+      <meta:subdirective
+          name="charset"
+          schema=".zcml.ICharsetDirective" 
+          />
+
+    </meta:complexDirective>
+
+    <meta:directive
+       name="mimeTypes"
+       schema=".zcml.IMimeTypesDirective"
+       handler=".zcml.mimeTypesDirective"
+       />
+
+  </meta:directives>
+
+</configure>
