@@ -17,10 +17,10 @@ $Id$
 
 import re
 
-import zope.app.event.interfaces
+import zope.component.interfaces
 import zope.schema.interfaces
 
-from zope import interface, schema
+from zope import interface, schema, component
 from zope.configuration.fields import PythonIdentifier, MessageID
 from i18n import _
 
@@ -119,7 +119,7 @@ class IContentTypeEncoded(IContentType):
 interface.directlyProvides(IContentTypeEncoded, IContentTypeInterface)
 
 
-class IContentTypeChangedEvent(zope.app.event.interfaces.IObjectEvent):
+class IContentTypeChangedEvent(zope.component.interfaces.IObjectEvent):
     """The content type for an object has changed.
 
     All changes of the `IContentTypeInterface` for an object are
