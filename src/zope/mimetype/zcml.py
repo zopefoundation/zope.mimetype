@@ -23,7 +23,7 @@ from zope.mimetype import codec
 from zope.mimetype import interfaces
 from zope.mimetype import types
 
-import zope.app.component.interface
+import zope.component.interface
 import zope.app.publisher.browser.icon
 
 from zope.app.component import metaconfigure
@@ -67,7 +67,7 @@ def mimeTypesDirective(_context, file, module):
         # Register the interface as a utility:
         _context.action(
             discriminator = None,
-            callable = zope.app.component.interface.provideInterface,
+            callable = zope.component.interface.provideInterface,
             args = (iface.__module__ + '.' + iface.getName(), iface)
             )
         for mime_type in info[2]:
@@ -76,7 +76,7 @@ def mimeTypesDirective(_context, file, module):
             _context.action(
                 discriminator = ('utility', provides, mime_type),
                 callable = metaconfigure.handler,
-                args = ('provideUtility', provides, iface, mime_type),
+                args = ('registerUtility', iface, provides, mime_type),
                 )
         icon = os.path.join(directory, info[3])
         if icon and os.path.isfile(icon):
