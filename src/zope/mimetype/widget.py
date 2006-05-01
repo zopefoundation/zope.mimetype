@@ -29,7 +29,7 @@ class TranslatableSourceSelectWidget(
         # XXX need a better way to sort in an internationalized context
         sortable = []
         for value in source:
-            t = self.terms.getTerm(value)
+            t = self.vocabulary.terms.getTerm(value)
             title = zope.i18n.translate(t.title, context=request)
             self.displays[value] = title, t.token
             lower = title.lower()
