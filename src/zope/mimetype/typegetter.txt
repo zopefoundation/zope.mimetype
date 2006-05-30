@@ -211,3 +211,38 @@ In this case, the smart extractor has refined the information
 determined from the filename using information from the uploaded
 data.  The specific approach taken by the extractor is not part of the
 interface, however.
+
+
+`charsetGetter()`
+~~~~~~~~~~~~~~~~~
+
+If you're interested in the character set of textual data, you can use
+the `charsetGetter` function (which can also be registered as the
+`ICharsetGetter` utility):
+
+The simplest case is when the character set is already specified in the
+content type.
+
+  >>> typegetter.charsetGetter(content_type='text/plain; charset=mambo-42')
+  'mambo-42'
+
+If it isn't, `charsetGetter` can try to guess by looking at actual data
+
+  >>> typegetter.charsetGetter(content_type='text/plain', data='just text')
+  'ascii'
+
+  >>> typegetter.charsetGetter(content_type='text/plain', data='\xe2\x98\xba')
+  'utf-8'
+
+  >>> import codecs
+  >>> typegetter.charsetGetter(data=codecs.BOM_UTF16_BE + '\x12\x34')
+  'utf-16be'
+
+  >>> typegetter.charsetGetter(data=codecs.BOM_UTF16_LE + '\x12\x34')
+  'utf-16le'
+
+If the character set cannot be determined, `charsetGetter` returns None.
+
+  >>> typegetter.charsetGetter(content_type='text/plain', data='\xff')
+  >>> typegetter.charsetGetter()
+

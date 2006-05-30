@@ -16,6 +16,7 @@
 # back into that, or this package could provide a replacement.
 #
 import mimetypes
+import codecs
 
 from zope import interface
 from zope.mimetype import interfaces
@@ -113,7 +114,22 @@ def charsetGetter(name=None, data=None, content_type=None):
         except ValueError:
             pass
         else:
-            return params.get("charset") or "ascii"
-    return "ascii"
+            if params.get("charset"):
+                return params["charset"]
+    if data:
+        if data.startswith(codecs.BOM_UTF16_LE):
+            return 'utf-16le'
+        elif data.startswith(codecs.BOM_UTF16_BE):
+            return 'utf-16be'
+        try:
+            unicode(data, 'ascii')
+            return 'ascii'
+        except UnicodeDecodeError:
+            try:
+                unicode(data, 'utf-8')
+                return 'utf-8'
+            except UnicodeDecodeError:
+                pass
+    return None
 
 interface.directlyProvides(charsetGetter, interfaces.ICharsetGetter)
