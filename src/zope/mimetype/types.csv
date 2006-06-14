@@ -22,7 +22,7 @@ IContentTypeCss, Cascading Style Sheet, .css, text/css, icons/css.gif, yes
 IContentTypeJavaScript, Javascript Program, .js .ls, text/javascript, icons/javascript.gif, yes
 IContentTypeImageGif, GIF Image, .gif, image/gif, icons/image.gif, no
 IContentTypeImageJpeg, JPEG Image, .jpg .jpeg .jpe, image/jpeg image/pjpeg, icons/image.gif, no
-IContentTypeImagePng, PNG Image, .png, image/x-png, icons/image.gif, no
+IContentTypeImagePng, PNG Image, .png, image/png image/x-png, icons/image.gif, no
 IContentTypeImageTiff, TIFF Image, .tif .tiff, image/tiff, icons/image.gif, no
 IContentTypeImageBitmap, MS Bitmap Image, .bmp, image/bmp, icons/image.gif, no
 IContentTypeImageMacintoshPicture, Macintosh Picture, .pict, image/x-pict, icons/image.gif, no
