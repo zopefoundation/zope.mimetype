@@ -62,6 +62,9 @@ def test_suite():
                              tearDown=placelesssetup.tearDown),
         doctest.DocFileSuite('typegetter.txt'),
         doctest.DocFileSuite('utils.txt'),
+        doctest.DocFileSuite('widget.txt',
+                             setUp=placelesssetup.setUp,
+                             tearDown=placelesssetup.tearDown),
         doctest.DocFileSuite(
             'codec.txt',
             optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,

@@ -47,21 +47,38 @@ class TranslatableSourceSelectWidget(
         # vocabulary, so that need not be considered here
         rendered_items = []
         count = 0
+
+        # Handle case of missing value
+        missing = self._toFormValue(self.context.missing_value)
+
+        if self._displayItemForMissingValue and not self.context.required:
+            if missing in values:
+                render = self.renderSelectedItem
+            else:
+                render = self.renderItem
+
+            missing_item = render(count,
+                self.translate(self._messageNoValue),
+                missing,
+                self.name,
+                cssClass)
+            rendered_items.append(missing_item)
+            count += 1
+
+        # Render normal values
         for value in self.order:
             item_text, token = self.displays[value]
 
             if value in values:
-                rendered_item = self.renderSelectedItem(count,
-                                                        item_text,
-                                                        token,
-                                                        self.name,
-                                                        cssClass)
+                render = self.renderSelectedItem
             else:
-                rendered_item = self.renderItem(count,
-                                                item_text,
-                                                token,
-                                                self.name,
-                                                cssClass)
+                render = self.renderItem
+
+            rendered_item = render(count,
+                item_text,
+                token,
+                self.name,
+                cssClass)
 
             rendered_items.append(rendered_item)
             count += 1
