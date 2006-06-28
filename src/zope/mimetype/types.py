@@ -26,7 +26,6 @@ def read(file_name):
     for name, title, extensions, mime_types, icon_name, encoded in csv.reader(file):
         extensions = extensions.split()
         mime_types = mime_types.split()
-        icon_name = icon_name.strip()
         encoded = (encoded.strip().lower() == 'yes')
         result[name] = (title.strip(), extensions, mime_types,
                         icon_name.strip(), encoded)
@@ -57,6 +56,7 @@ def makeInterface(name, info, module):
     interface.setTaggedValue('mimeTypes', mime_types)
     interface.setTaggedValue('title', _(title, default=title))
     return interface
+
 
 def registerUtilities(interfaces, data):
     for name, interface in interfaces.iteritems():
