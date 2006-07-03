@@ -19,7 +19,7 @@ IContentTypeXmlDtd, XML Document Type Definition, .dtd, application/xml-dtd, ico
 IContentTypeXmlExternalEntity, XML External Parsed Entity, .xml, application/xml-external-parsed-entity text/xml-external-parsed-entity, icons/xml.gif, yes
 IContentTypeSgml, SGML Document, .sgm .sgml, text/sgml, icons/document.gif, yes
 IContentTypeCss, Cascading Style Sheet, .css, text/css, icons/css.gif, yes
-IContentTypeJavaScript, Javascript Program, .js .ls, text/javascript, icons/javascript.gif, yes
+IContentTypeJavaScript, Javascript Program, .js .ls, text/javascript application/x-javascript, icons/javascript.gif, yes
 IContentTypeImageGif, GIF Image, .gif, image/gif, icons/image.gif, no
 IContentTypeImageJpeg, JPEG Image, .jpg .jpeg .jpe, image/jpeg image/pjpeg, icons/image.gif, no
 IContentTypeImagePng, PNG Image, .png, image/png image/x-png, icons/image.gif, no
