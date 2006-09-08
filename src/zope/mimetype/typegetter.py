@@ -115,7 +115,7 @@ def charsetGetter(name=None, data=None, content_type=None):
             pass
         else:
             if params.get("charset"):
-                return params["charset"]
+                return params["charset"].lower()
     if data:
         if data.startswith(codecs.BOM_UTF16_LE):
             return 'utf-16le'

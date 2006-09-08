@@ -226,6 +226,12 @@ content type.
   >>> typegetter.charsetGetter(content_type='text/plain; charset=mambo-42')
   'mambo-42'
 
+Note that the charset name is lowercased, because all the default ICharset
+and ICharsetCodec utilities are registered for lowercase names.
+
+  >>> typegetter.charsetGetter(content_type='text/plain; charset=UTF-8')
+  'utf-8'
+
 If it isn't, `charsetGetter` can try to guess by looking at actual data
 
   >>> typegetter.charsetGetter(content_type='text/plain', data='just text')
