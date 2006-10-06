@@ -21,7 +21,6 @@ import zope.app.form.browser.interfaces
 import zope.component
 import zope.mimetype.interfaces
 import zope.publisher.interfaces.browser
-import zope.schema.interfaces
 
 
 # Base classes

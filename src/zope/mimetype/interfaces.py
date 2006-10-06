@@ -20,8 +20,8 @@ import re
 import zope.component.interfaces
 import zope.schema.interfaces
 
-from zope import interface, schema, component
-from zope.configuration.fields import PythonIdentifier, MessageID
+from zope import interface, schema
+from zope.configuration.fields import MessageID
 from i18n import _
 
 

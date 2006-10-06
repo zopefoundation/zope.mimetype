@@ -13,7 +13,6 @@
 
 import os.path
 
-from zope import component
 from zope import interface
 from zope import schema
 from zope.configuration import fields

@@ -19,7 +19,6 @@ import zope.component
 import zope.interface
 import zope.mimetype.interfaces
 import zope.publisher.contenttype
-import zope.security.proxy
 
 
 class ContentInfo(object):
