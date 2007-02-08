@@ -7,7 +7,7 @@ def read(*rnames):
 name = "zope.mimetype"
 setup(
     name = name,
-    version = "1.0",
+    version = "1.1dev",
     author = "the Zope 3 project",
     author_email = "zope3-dev@zope.org",
     description = "A simple package for working with MIME content types",
