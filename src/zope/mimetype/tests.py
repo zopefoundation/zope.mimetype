@@ -21,7 +21,7 @@ from zope.app.testing import placelesssetup
 
 import zope.interface
 import zope.mimetype.interfaces
-
+from zope.mimetype import testing
 
 class ISampleContentTypeOne(zope.interface.Interface):
     """This is a sample content type interface."""
@@ -45,11 +45,13 @@ zope.interface.directlyProvides(
 
 
 def test_suite():
+    retrievingMimeTypes = functional.FunctionalDocFileSuite(
+        'retrieving_mime_types.txt',
+        optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
+        )
+    retrievingMimeTypes.layer = testing.MimetypeLayer
     return unittest.TestSuite((
-        functional.FunctionalDocFileSuite(
-            'retrieving_mime_types.txt',
-            optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
-            ),
+        retrievingMimeTypes,
         doctest.DocFileSuite('event.txt',
                              setUp=placelesssetup.setUp,
                              tearDown=placelesssetup.tearDown),
