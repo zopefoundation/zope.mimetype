@@ -2,6 +2,15 @@
 CHANGES
 =======
 
+1.1.1 (unreleased)
+------------------
+
+- Fixed wrong package version (version ``1.1.0`` was released as ``0.4.0`` at
+  `pypi` but as ``1.1dev`` at `distribution.zope.org`)
+
+- Fixed author email and home page address.
+
+
 1.1.0 (2007-11-01)
 ------------------
 
