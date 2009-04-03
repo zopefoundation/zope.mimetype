@@ -21,7 +21,7 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '1.1.1dev'
+version = '1.1.1'
 
 setup(name='zope.mimetype',
       version=version,
@@ -31,8 +31,7 @@ setup(name='zope.mimetype',
       long_description=(
           read('README.txt')
           + '\n\n' +
-          'Detailed Documentation\n' +
-          '======================\n\n'
+          '.. contents::'
           + '\n\n' +
           read('src', 'zope', 'mimetype', 'README.txt')
           + '\n\n' +
