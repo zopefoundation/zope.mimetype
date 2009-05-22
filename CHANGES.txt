@@ -5,7 +5,7 @@ CHANGES
 1.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- No longer depends on ``zope.app.component``.
 
 
 1.1.1 (2009-04-03)

@@ -22,10 +22,9 @@ from zope.mimetype import codec
 from zope.mimetype import interfaces
 from zope.mimetype import types
 
+import zope.component.zcml
 import zope.component.interface
 import zope.app.publisher.browser.icon
-
-from zope.app.component import metaconfigure
 
 
 class IMimeTypesDirective(interface.Interface):
@@ -74,14 +73,14 @@ def mimeTypesDirective(_context, file, module):
             # utility for each appropriate MIME type:
             _context.action(
                 discriminator = ('utility', provides, mime_type),
-                callable = metaconfigure.handler,
+                callable = zope.component.zcml.handler,
                 args = ('registerUtility', iface, provides, mime_type),
                 )
         icon = os.path.join(directory, info[3])
         if icon and os.path.isfile(icon):
             zope.app.publisher.browser.icon.IconDirective(
                 _context, "zmi_icon", iface, icon)
-            
+
 
 class ICodecDirective(interface.Interface):
     """Defines a codec.
