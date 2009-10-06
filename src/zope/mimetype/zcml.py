@@ -22,9 +22,9 @@ from zope.mimetype import codec
 from zope.mimetype import interfaces
 from zope.mimetype import types
 
+import zope.browserresource.metaconfigure
 import zope.component.zcml
 import zope.component.interface
-import zope.app.publisher.browser.icon
 
 
 class IMimeTypesDirective(interface.Interface):
@@ -78,7 +78,7 @@ def mimeTypesDirective(_context, file, module):
                 )
         icon = os.path.join(directory, info[3])
         if icon and os.path.isfile(icon):
-            zope.app.publisher.browser.icon.IconDirective(
+            zope.browserresource.metaconfigure.icon(
                 _context, "zmi_icon", iface, icon)
 
 
