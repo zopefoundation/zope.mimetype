@@ -26,7 +26,7 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '1.1.3dev'
+version = '1.2.0dev'
 
 setup(name='zope.mimetype',
       version=version,
@@ -87,6 +87,7 @@ setup(name='zope.mimetype',
                         'zope.browserresource',
                         'zope.component',
                         'zope.configuration',
+                        'zope.contenttype>=3.5.0dev',
                         'zope.event',
                         'zope.i18n',
                         'zope.i18nmessageid',

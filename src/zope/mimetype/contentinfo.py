@@ -16,9 +16,9 @@
 __docformat__ = "reStructuredText"
 
 import zope.component
+import zope.contenttype.parse
 import zope.interface
 import zope.mimetype.interfaces
-import zope.publisher.contenttype
 
 
 class ContentInfo(object):
@@ -41,7 +41,7 @@ class ContentInfo(object):
             if "charset" in self.effectiveParameters and not encoded:
                 del self.effectiveParameters["charset"]
             major, minor = self.effectiveMimeType.split("/")
-            self.contentType = zope.publisher.contenttype.join(
+            self.contentType = zope.contenttype.parse.join(
                 (major, minor, self.effectiveParameters))
         else:
             self.contentType = self.effectiveMimeType

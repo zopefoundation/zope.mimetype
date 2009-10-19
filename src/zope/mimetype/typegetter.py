@@ -20,7 +20,7 @@ import codecs
 
 from zope import interface
 from zope.mimetype import interfaces
-from zope.publisher import contenttype
+import zope.contenttype.parse
 
 
 def mimeTypeGetter(name=None, data=None, content_type=None):
@@ -28,7 +28,8 @@ def mimeTypeGetter(name=None, data=None, content_type=None):
         return None
     if content_type:
         try:
-            major, minor, params = contenttype.parseOrdered(content_type)
+            major, minor, params = zope.contenttype.parse.parseOrdered(
+                content_type)
         except ValueError:
             pass
         else:
@@ -110,7 +111,7 @@ def charsetGetter(name=None, data=None, content_type=None):
         return None
     if content_type:
         try:
-            major, minor, params = contenttype.parse(content_type)
+            major, minor, params = zope.contenttype.parse.parse(content_type)
         except ValueError:
             pass
         else:
