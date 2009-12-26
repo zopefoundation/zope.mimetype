@@ -14,7 +14,10 @@ content type interfaces.  This is normally done via ZCML.
 A utility is used to retrieve MIME types.
 
     >>> from zope import component
+    >>> from zope.mimetype import typegetter
     >>> from zope.mimetype.interfaces import IMimeTypeGetter
+    >>> component.provideUtility(typegetter.smartMimeTypeGuesser,
+    ...                          provides=IMimeTypeGetter)
     >>> mime_getter = component.getUtility(IMimeTypeGetter)
 
 To map a particular file name, file contents, and content type to a MIME type.
@@ -35,6 +38,8 @@ Character Sets
 A utility is also used to retrieve character sets (charsets).
 
     >>> from zope.mimetype.interfaces import ICharsetGetter
+    >>> component.provideUtility(typegetter.charsetGetter,
+    ...                          provides=ICharsetGetter)
     >>> charset_getter = component.getUtility(ICharsetGetter)
 
 To map a particular file name, file contents, and content type to a charset.

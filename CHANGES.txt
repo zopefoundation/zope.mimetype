@@ -5,6 +5,9 @@ CHANGES
 1.2.0 (unreleased)
 ------------------
 
+- Converted functional tests to unit tests and get rid of all extra test
+  dependencies as a result.
+
 - Use the ITerms interface from zope.browser.
 
 - Declared missing dependencies, resolved direct dependency on

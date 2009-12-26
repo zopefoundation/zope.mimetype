@@ -11,7 +11,7 @@
 #
 ##############################################################################
 
-# There's a zope.app.content_types module that exports a similar API,
+# There's a zope.contenttype module that exports a similar API,
 # but that's pretty hueristic.  Some of this should perhaps be folded
 # back into that, or this package could provide a replacement.
 #

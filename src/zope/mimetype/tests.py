@@ -16,12 +16,11 @@ $Id$
 """
 import unittest
 import doctest
-from zope.app.testing import functional
-from zope.app.testing import placelesssetup
 
+from zope.component import testing
 import zope.interface
 import zope.mimetype.interfaces
-from zope.mimetype import testing
+
 
 class ISampleContentTypeOne(zope.interface.Interface):
     """This is a sample content type interface."""
@@ -45,28 +44,25 @@ zope.interface.directlyProvides(
 
 
 def test_suite():
-    retrievingMimeTypes = functional.FunctionalDocFileSuite(
-        'retrieving_mime_types.txt',
-        optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
-        )
-    retrievingMimeTypes.layer = testing.MimetypeLayer
     return unittest.TestSuite((
-        retrievingMimeTypes,
+        doctest.DocFileSuite('retrieving_mime_types.txt',
+                             setUp=testing.setUp,
+                             tearDown=testing.tearDown),
         doctest.DocFileSuite('event.txt',
-                             setUp=placelesssetup.setUp,
-                             tearDown=placelesssetup.tearDown),
+                             setUp=testing.setUp,
+                             tearDown=testing.tearDown),
         doctest.DocFileSuite('source.txt',
-                             setUp=placelesssetup.setUp,
-                             tearDown=placelesssetup.tearDown),
+                             setUp=testing.setUp,
+                             tearDown=testing.tearDown),
         doctest.DocFileSuite('constraints.txt'),
         doctest.DocFileSuite('contentinfo.txt',
-                             setUp=placelesssetup.setUp,
-                             tearDown=placelesssetup.tearDown),
+                             setUp=testing.setUp,
+                             tearDown=testing.tearDown),
         doctest.DocFileSuite('typegetter.txt'),
         doctest.DocFileSuite('utils.txt'),
         doctest.DocFileSuite('widget.txt',
-                             setUp=placelesssetup.setUp,
-                             tearDown=placelesssetup.tearDown),
+                             setUp=testing.setUp,
+                             tearDown=testing.tearDown),
         doctest.DocFileSuite(
             'codec.txt',
             optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
