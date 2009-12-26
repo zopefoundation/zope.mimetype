@@ -2,7 +2,7 @@
 CHANGES
 =======
 
-1.2.0 (unreleased)
+1.2.0 (2009-12-26)
 ------------------
 
 - Converted functional tests to unit tests and get rid of all extra test
@@ -16,12 +16,10 @@ CHANGES
 - Import content-type parser from zope.contenttype, adding a dependency on
   that package.
 
-
 1.1.2 (2009-05-22)
 ------------------
 
 - No longer depends on ``zope.app.component``.
-
 
 1.1.1 (2009-04-03)
 ------------------
@@ -30,7 +28,6 @@ CHANGES
   `pypi` but as ``1.1dev`` at `download.zope.org/distribution`)
 
 - Fixed author email and home page address.
-
 
 1.1.0 (2007-11-01)
 ------------------
