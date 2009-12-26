@@ -17,7 +17,7 @@ __docformat__ = "reStructuredText"
 
 import sys
 
-import zope.app.form.browser.interfaces
+from zope.browser.interfaces import ITerms
 import zope.component
 import zope.mimetype.interfaces
 import zope.publisher.interfaces.browser
@@ -62,8 +62,7 @@ class UtilitySource(object):
 class Terms(object):
     """Utility to provide terms for content type interfaces."""
 
-    zope.interface.implements(
-        zope.app.form.browser.interfaces.ITerms)
+    zope.interface.implements(ITerms)
 
     def __init__(self, source, request):
         self.context = source
@@ -188,7 +187,7 @@ class CodecTerm(object):
         charset = zope.component.queryUtility(
             zope.mimetype.interfaces.ICodecPreferredCharset,
             name=self.value.name)
-        if codec is None:
+        if charset is None:
             available = [(name, charset)
                          for (charset, name) in zope.component.getUtilitiesFor(
                              zope.mimetype.interfaces.ICharset)

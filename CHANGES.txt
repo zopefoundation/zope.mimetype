@@ -5,8 +5,11 @@ CHANGES
 1.2.0 (unreleased)
 ------------------
 
+- Use the ITerms interface from zope.browser.
+
 - Declared missing dependencies, resolved direct dependency on
   zope.app.publisher.
+
 - Import content-type parser from zope.contenttype, adding a dependency on
   that package.
 
