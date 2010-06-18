@@ -13,12 +13,12 @@ The implementation ignores these issues for now.
 __docformat__ = "reStructuredText"
 
 
-import zope.app.form.browser.source
+import zope.formlib.source
 import zope.i18n
 
 
 class TranslatableSourceSelectWidget(
-    zope.app.form.browser.source.SourceSelectWidget):
+    zope.formlib.source.SourceSelectWidget):
 
     def __init__(self, field, source, request):
         super(TranslatableSourceSelectWidget, self).__init__(

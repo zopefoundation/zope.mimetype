@@ -6,7 +6,7 @@ TranslatableSourceSelectWidget is a SourceSelectWidget that translates
 and sorts the choices.
 
 We will borrow the boring set up code from the SourceSelectWidget test
-(source.txt in zope.app.form.browser).
+(source.txt in zope.formlib).
 
     >>> import zope.interface
     >>> import zope.component
@@ -74,14 +74,14 @@ a widget.
 Note that the options are ordered alphabetically.
 
 If the field is not required, we will also see a special choice labeled
-"(no value)" at the top of the list
+"(nothing selected)" at the top of the list
 
     >>> dog.required = False
     >>> print widget()
     <div>
     <div class="value">
     <select id="field.dog" name="field.dog" size="5" >
-    <option selected="selected" value="">(no value)</option>
+    <option selected="selected" value="">(nothing selected)</option>
     <option value="Ym93c2Vy">bowser</option>
     <option value="ZHVjaGVzcw==">duchess</option>
     <option value="bGFzc2ll">lassie</option>
