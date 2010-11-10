@@ -5,6 +5,8 @@ CHANGES
 1.3.1 (unreleased)
 ------------------
 
+- No longer depending on `zope.app.form` in `configure.zcml` by using
+  `zope.formlib` instead, where the needed interfaces are living now.
 
 1.3.0 (2010-06-26)
 ------------------

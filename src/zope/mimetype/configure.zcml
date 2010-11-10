@@ -25,7 +25,7 @@
       type="zope.publisher.interfaces.browser.IBrowserRequest"
       for="zope.schema.interfaces.IChoice
            zope.mimetype.interfaces.ICodecSource"
-      provides="zope.app.form.interfaces.IInputWidget"
+      provides="zope.formlib.interfaces.IInputWidget"
       factory=".widget.TranslatableSourceDropdownWidget"
       permission="zope.Public"
       />
@@ -34,7 +34,7 @@
       type="zope.publisher.interfaces.browser.IBrowserRequest"
       for="zope.schema.interfaces.IChoice
            zope.mimetype.interfaces.IContentTypeSource"
-      provides="zope.app.form.interfaces.IInputWidget"
+      provides="zope.formlib.interfaces.IInputWidget"
       factory=".widget.TranslatableSourceDropdownWidget"
       permission="zope.Public"
       />
