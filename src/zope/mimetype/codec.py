@@ -16,8 +16,8 @@ import os
 import re
 
 from zope import interface, component
-from interfaces import ICodec, ICharsetCodec
-from interfaces import ICharset, ICodecPreferredCharset
+from zope.mimetype.interfaces import ICodec, ICharsetCodec
+from zope.mimetype.interfaces import ICharset, ICodecPreferredCharset
 
 
 class Codec:
