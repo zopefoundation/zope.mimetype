@@ -13,15 +13,15 @@ We will borrow the boring set up code from the SourceSelectWidget test
     >>> import zope.schema
     >>> import zope.schema.interfaces
 
-    >>> class SourceList(list):
-    ...     zope.interface.implements(zope.schema.interfaces.IIterableSource)
+    >>> @zope.interface.implementer(zope.schema.interfaces.IIterableSource)
+    ... class SourceList(list):
+    ...     pass
 
     >>> import zope.publisher.interfaces.browser
     >>> from zope.browser.interfaces import ITerms
     >>> from zope.schema.vocabulary import SimpleTerm
-    >>> class ListTerms:
-    ...
-    ...     zope.interface.implements(ITerms)
+    >>> @zope.interface.implementer(ITerms)
+    ... class ListTerms:
     ...
     ...     def __init__(self, source, request):
     ...         pass # We don't actually need the source or the request :)

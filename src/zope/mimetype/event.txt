@@ -22,10 +22,8 @@ We'll also define a simple content object::
   >>> class IContent(zope.interface.Interface):
   ...     pass
 
-  >>> class Content(object):
-  ...
-  ...     zope.interface.implements(IContent)
-  ...
+  >>> @zope.interface.implementer(IContent)
+  ... class Content(object):
   ...     def __str__(self):
   ...         return "<MyContent>"
 

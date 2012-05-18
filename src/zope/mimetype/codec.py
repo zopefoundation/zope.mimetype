@@ -20,8 +20,8 @@ from zope.mimetype.interfaces import ICodec, ICharsetCodec
 from zope.mimetype.interfaces import ICharset, ICodecPreferredCharset
 
 
+@interface.implementer(ICodec)
 class Codec:
-    interface.implements(ICodec)
     
     def __init__(self, name, title):
         self.name = name
@@ -38,8 +38,8 @@ def addCodec(name, title=None):
     component.provideUtility(codec, provides=ICodec, name=name)
 
 
+@interface.implementer(ICharset)
 class Charset:
-    interface.implements(ICharset)
 
     def __init__(self, name, encoding):
         self.name = name

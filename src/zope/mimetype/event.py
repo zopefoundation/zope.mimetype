@@ -22,10 +22,8 @@ import zope.mimetype.interfaces
 import zope.security.proxy
 
 
+@zope.interface.implementer(zope.mimetype.interfaces.IContentTypeChangedEvent)
 class ContentTypeChangedEvent(zope.component.interfaces.ObjectEvent):
-
-    zope.interface.implements(
-        zope.mimetype.interfaces.IContentTypeChangedEvent)
 
     def __init__(self, object, oldContentType, newContentType):
         super(ContentTypeChangedEvent, self).__init__(object)

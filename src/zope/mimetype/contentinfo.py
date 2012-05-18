@@ -21,15 +21,11 @@ import zope.interface
 import zope.mimetype.interfaces
 
 
+@zope.interface.implementer(zope.mimetype.interfaces.IContentInfo)
+@zope.component.adapter(zope.interface.Interface)
 class ContentInfo(object):
     """Basic IContentInfo that provides information from an IContentTypeAware.
     """
-
-    zope.interface.implements(
-        zope.mimetype.interfaces.IContentInfo)
-    zope.component.adapts(
-        zope.interface.Interface)
-
     def __init__(self, context):
         self.context = context
         aware = zope.mimetype.interfaces.IContentTypeAware(context)

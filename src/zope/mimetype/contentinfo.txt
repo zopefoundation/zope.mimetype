@@ -23,9 +23,8 @@ information::
 
   >>> import zope.interface
 
-  >>> class Content(object):
-  ...     zope.interface.implements(interfaces.IContentTypeAware)
-  ...
+  >>> @zope.interface.implementer(interfaces.IContentTypeAware)
+  ... class Content(object):
   ...     def __init__(self, mimeType, charset=None):
   ...         self.mimeType = mimeType
   ...         self.parameters = {}
@@ -108,8 +107,8 @@ objects and register them::
   >>> import codecs
   >>> from zope.mimetype.i18n import _
 
-  >>> class Utf8Codec(object):
-  ...     zope.interface.implements(interfaces.ICodec)
+  >>> @zope.interface.implementer(interfaces.ICodec)
+  ... class Utf8Codec(object):
   ...
   ...     name = "utf-8"
   ...     title = _("UTF-8")
@@ -123,8 +122,8 @@ objects and register them::
 
   >>> utf8_codec = Utf8Codec()
 
-  >>> class Utf8Charset(object):
-  ...     zope.interface.implements(interfaces.ICharset)
+  >>> @zope.interface.implementer(interfaces.ICharset)
+  ... class Utf8Charset(object):
   ...
   ...     name = utf8_codec.name
   ...     encoding = name

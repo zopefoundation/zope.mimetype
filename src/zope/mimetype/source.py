@@ -59,10 +59,9 @@ class UtilitySource(object):
         return self._length
 
 
+@zope.interface.implementer(ITerms)
 class Terms(object):
     """Utility to provide terms for content type interfaces."""
-
-    zope.interface.implements(ITerms)
 
     def __init__(self, source, request):
         self.context = source
@@ -76,21 +75,18 @@ class Terms(object):
 
 # Source & vocabulary for `IContentTypeInterface` providers
 
+@zope.interface.implementer(zope.mimetype.interfaces.IContentTypeSource)
 class ContentTypeSource(UtilitySource):
     """Source of IContentTypeInterface providers."""
-
-    zope.interface.implements(
-        zope.mimetype.interfaces.IContentTypeSource)
 
     _interface = zope.mimetype.interfaces.IContentTypeInterface
 
 
-class ContentTypeTerms(Terms):
-    """Utility to provide terms for content type interfaces."""
-
-    zope.component.adapts(
+@zope.component.adapter(
         zope.mimetype.interfaces.IContentTypeSource,
         zope.publisher.interfaces.browser.IBrowserRequest)
+class ContentTypeTerms(Terms):
+    """Utility to provide terms for content type interfaces."""
 
     def getValue(self, token):
         module, name = token.rsplit(".", 1)
@@ -108,10 +104,8 @@ class ContentTypeTerms(Terms):
         return ContentTypeTerm(value)
 
 
+@zope.interface.implementer(zope.mimetype.interfaces.IContentTypeTerm)
 class ContentTypeTerm(object):
-
-    zope.interface.implements(
-        zope.mimetype.interfaces.IContentTypeTerm)
 
     def __init__(self, interface):
         self.value = interface
@@ -138,21 +132,18 @@ contentTypeSource = ContentTypeSource()
 
 # Source & vocabulary for `IContentTypeInterface` providers
 
+@zope.interface.implementer(zope.mimetype.interfaces.ICodecSource)
 class CodecSource(UtilitySource):
     """Source of ICodec providers."""
-
-    zope.interface.implements(
-        zope.mimetype.interfaces.ICodecSource)
 
     _interface = zope.mimetype.interfaces.ICodec
 
 
-class CodecTerms(Terms):
-    """Utility to provide terms for codecs."""
-
-    zope.component.adapts(
+@zope.component.adapter(
         zope.mimetype.interfaces.ICodecSource,
         zope.publisher.interfaces.browser.IBrowserRequest)
+class CodecTerms(Terms):
+    """Utility to provide terms for codecs."""
 
     def getValue(self, token):
         codec = zope.component.queryUtility(
@@ -167,9 +158,8 @@ class CodecTerms(Terms):
         return CodecTerm(value)
 
 
+@zope.interface.implementer(zope.mimetype.interfaces.ICodecTerm)
 class CodecTerm(object):
-    zope.interface.implements(
-        zope.mimetype.interfaces.ICodecTerm)
 
     def __init__(self, codec):
         self.value = codec
