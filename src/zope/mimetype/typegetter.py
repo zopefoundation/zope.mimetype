@@ -123,11 +123,11 @@ def charsetGetter(name=None, data=None, content_type=None):
         elif data.startswith(codecs.BOM_UTF16_BE):
             return 'utf-16be'
         try:
-            unicode(data, 'ascii')
+            data.decode('ascii')
             return 'ascii'
         except UnicodeDecodeError:
             try:
-                unicode(data, 'utf-8')
+                data.decode('utf-8')
                 return 'utf-8'
             except UnicodeDecodeError:
                 pass

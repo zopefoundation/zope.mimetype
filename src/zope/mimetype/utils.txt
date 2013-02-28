@@ -10,7 +10,7 @@ LookupErrors (the character set did not cleanly convert to a codec that
 Python knows about) or UnicodeDecodeErrors (the string included characters
 that were not in the range of the codec associated with the character set).
 
-    >>> original = 'This is an o with a slash through it: \xb8.'
+    >>> original = b'This is an o with a slash through it: \xb8.'
     >>> charset = 'Latin-7' # Baltic Rim or iso-8859-13
     >>> from zope.mimetype import utils
     >>> utils.decode(original, charset)

@@ -11,16 +11,32 @@
 #
 ##############################################################################
 """Test harness for `zope.mimetype`.
-
-$Id$
 """
-import unittest
+from __future__ import print_function
 import doctest
+import re
+import unittest
 
-from zope.component import testing
 import zope.interface
 import zope.mimetype.interfaces
+from zope.component import testing
+from zope.testing import renormalizing
 
+checker = renormalizing.RENormalizing([
+    # Python 3 unicode removed the "u".
+    (re.compile("u('.*?')"),
+     r"\1"),
+    (re.compile('u(".*?")'),
+     r"\1"),
+    # Python 3 bytes adds the "b".
+    (re.compile("b('.*?')"),
+     r"\1"),
+    (re.compile('b(".*?")'),
+     r"\1"),
+    # Python 3 renames builtins.
+    (re.compile("__builtin__"),
+     r"builtins"),
+    ])
 
 class ISampleContentTypeOne(zope.interface.Interface):
     """This is a sample content type interface."""
@@ -42,30 +58,42 @@ zope.interface.directlyProvides(
     ISampleContentTypeTwo,
     zope.mimetype.interfaces.IContentTypeInterface)
 
-
 def test_suite():
     return unittest.TestSuite((
-        doctest.DocFileSuite('retrieving_mime_types.txt',
-                             setUp=testing.setUp,
-                             tearDown=testing.tearDown),
-        doctest.DocFileSuite('event.txt',
-                             setUp=testing.setUp,
-                             tearDown=testing.tearDown),
-        doctest.DocFileSuite('source.txt',
-                             setUp=testing.setUp,
-                             tearDown=testing.tearDown),
-        doctest.DocFileSuite('constraints.txt'),
-        doctest.DocFileSuite('contentinfo.txt',
-                             setUp=testing.setUp,
-                             tearDown=testing.tearDown),
-        doctest.DocFileSuite('typegetter.txt'),
-        doctest.DocFileSuite('utils.txt'),
-        doctest.DocFileSuite('widget.txt',
-                             setUp=testing.setUp,
-                             tearDown=testing.tearDown),
+        doctest.DocFileSuite(
+                'retrieving_mime_types.txt',
+                setUp=testing.setUp, tearDown=testing.tearDown,
+                checker=checker),
+        doctest.DocFileSuite(
+                'event.txt',
+                setUp=testing.setUp, tearDown=testing.tearDown,
+                globs={'print_function': print_function},
+                checker=checker),
+        doctest.DocFileSuite(
+                'source.txt',
+                setUp=testing.setUp, tearDown=testing.tearDown,
+                checker=checker),
+        doctest.DocFileSuite(
+                'constraints.txt',
+                checker=checker),
+        doctest.DocFileSuite(
+                'contentinfo.txt',
+                setUp=testing.setUp, tearDown=testing.tearDown,
+                checker=checker),
+        doctest.DocFileSuite(
+                'typegetter.txt',
+                checker=checker),
+        doctest.DocFileSuite(
+                'utils.txt',
+                checker=checker),
+        doctest.DocFileSuite(
+                'widget.txt',
+                setUp=testing.setUp, tearDown=testing.tearDown,
+                checker=checker),
         doctest.DocFileSuite(
             'codec.txt',
             optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
+            checker=checker,
             ),
         ))
 

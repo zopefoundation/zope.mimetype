@@ -54,7 +54,7 @@ the unencoded content first::
 
 For unencoded content, there is never a codec::
 
-  >>> print ci.getCodec()
+  >>> print(ci.getCodec())
   None
 
 It is also disallowed to try decoding such content::
@@ -67,7 +67,7 @@ It is also disallowed to try decoding such content::
 Attemping to decode data using an uncoded object causes an exception
 to be raised::
 
-  >>> print ci.decode("data")
+  >>> print(ci.decode("data"))
   Traceback (most recent call last):
   ...
   ValueError: no matching codec found
@@ -86,7 +86,7 @@ The `getCodec()` and `decode()` methods can be used to handle encoded
 data using the encoding indicated by the ``charset`` parameter.  Let's
 store some UTF-8 data in a variable::
 
-  >>> utf8_data = unicode("\xAB\xBB", "iso-8859-1").encode("utf-8")
+  >>> utf8_data = b"\xAB\xBB".decode("iso-8859-1").encode("utf-8")
   >>> utf8_data
   '\xc2\xab\xc2\xbb'
 

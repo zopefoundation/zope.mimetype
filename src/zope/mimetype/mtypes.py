@@ -10,15 +10,16 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-
+"""Mime-Types management
+"""
+import os
+import csv
+import zope.interface
 from zope.component import provideUtility
 from zope.interface.interface import InterfaceClass
 from zope.mimetype.interfaces import IContentType, IContentTypeEncoded
 from zope.mimetype.interfaces import IContentTypeInterface
 from zope.mimetype.i18n import _
-import os
-import csv
-import zope.interface
 
 def read(file_name):
     file = open(file_name)
@@ -29,6 +30,7 @@ def read(file_name):
         encoded = (encoded.strip().lower() == 'yes')
         result[name] = (title.strip(), extensions, mime_types,
                         icon_name.strip(), encoded)
+    file.close()
     return result
 
 def getInterfaces(data, module=None):
@@ -36,7 +38,7 @@ def getInterfaces(data, module=None):
     if module is None:
         module = __name__
     globs = globals()
-    for name, info in data.iteritems():
+    for name, info in data.items():
         interface = globs.get(name)
         if interface is None:
             interface = makeInterface(name, info, module)
@@ -59,7 +61,7 @@ def makeInterface(name, info, module):
 
 
 def registerUtilities(interfaces, data):
-    for name, interface in interfaces.iteritems():
+    for name, interface in interfaces.items():
         for mime_type in data[name][2]:
             provideUtility(interface, provides=IContentTypeInterface,
                            name=mime_type)

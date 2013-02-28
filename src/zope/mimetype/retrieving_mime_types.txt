@@ -8,8 +8,8 @@ MIME Types
 We'll start by initializing the interfaces and registrations for the
 content type interfaces.  This is normally done via ZCML.
 
-    >>> from zope.mimetype import types
-    >>> types.setup()
+    >>> from zope.mimetype import mtypes
+    >>> mtypes.setup()
 
 A utility is used to retrieve MIME types.
 
@@ -61,7 +61,7 @@ Given a MIME type we need to be able to find the appropriate interface.
 
     >>> from zope.mimetype.interfaces import IContentTypeInterface
     >>> component.getUtility(IContentTypeInterface, name=u'text/plain')
-    <InterfaceClass zope.mimetype.types.IContentTypeTextPlain>
+    <InterfaceClass zope.mimetype.mtypes.IContentTypeTextPlain>
 
 It is also possible to enumerate all content type interfaces.
 
@@ -71,4 +71,4 @@ If you want to find an interface from a MIME string, you can use the
 utilityies.
 
     >>> component.getUtility(IContentTypeInterface, name='text/plain')
-    <InterfaceClass zope.mimetype.types.IContentTypeTextPlain>
+    <InterfaceClass zope.mimetype.mtypes.IContentTypeTextPlain>

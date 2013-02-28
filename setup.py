@@ -17,8 +17,6 @@
 # Zope Toolkit policies as described by this documentation.
 ##############################################################################
 """Setup for zope.mimetype package
-
-$Id$
 """
 import os
 from setuptools import setup, find_packages
@@ -26,10 +24,8 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '2.0.0dev'
-
 setup(name='zope.mimetype',
-      version=version,
+      version='2.0.0a1.dev',
       author='Zope Foundation and Contributors',
       author_email='zope-dev@zope.org',
       description = "A simple package for working with MIME content types",
@@ -70,6 +66,9 @@ setup(name='zope.mimetype',
           'Programming Language :: Python :: 2',
           'Programming Language :: Python :: 2.6',
           'Programming Language :: Python :: 2.7',
+          'Programming Language :: Python :: 3',
+          'Programming Language :: Python :: 3.3',
+          'Programming Language :: Python :: Implementation :: CPython',
           'Natural Language :: English',
           'Operating System :: OS Independent',
           'Topic :: Internet :: WWW/HTTP',
@@ -79,7 +78,12 @@ setup(name='zope.mimetype',
       packages=find_packages('src'),
       package_dir = {'': 'src'},
       namespace_packages=['zope'],
-      extras_require = dict(test=['zope.component [test]']),
+      extras_require = dict(
+        test=[
+            'zope.component',
+            'zope.testing',
+            ]
+        ),
       install_requires=['setuptools',
                         'zope.browser',
                         'zope.browserresource',
@@ -95,6 +99,11 @@ setup(name='zope.mimetype',
                         'zope.schema',
                         'zope.security',
                         ],
+      tests_require=[
+            'zope.component',
+            'zope.testing',
+            ],
+      test_suite='zope.mimetype.tests.test_suite',
       include_package_data = True,
       zip_safe = False,
       )

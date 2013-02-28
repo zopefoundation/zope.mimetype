@@ -47,20 +47,20 @@ other than download it, it's impossible to mis-interpret the data.)
 When there's no information at all about the content, the extractor
 returns None::
 
-  >>> print typegetter.mimeTypeGetter()
+  >>> print(typegetter.mimeTypeGetter())
   None
 
 Providing only the upload filename or data, or both, still produces
 None, since no guessing is being done::
 
-  >>> print typegetter.mimeTypeGetter(name="file.html")
+  >>> print(typegetter.mimeTypeGetter(name="file.html"))
   None
 
-  >>> print typegetter.mimeTypeGetter(data="<html>...</html>")
+  >>> print(typegetter.mimeTypeGetter(data="<html>...</html>"))
   None
 
-  >>> print typegetter.mimeTypeGetter(
-  ...     name="file.html", data="<html>...</html>")
+  >>> print(typegetter.mimeTypeGetter(
+  ...     name="file.html", data="<html>...</html>"))
   None
 
 If a content type header is available for the input, that is used
@@ -78,14 +78,14 @@ If the content-type information is provided but malformed (not in
 conformance with RFC 2822), it is ignored, since the intent cannot be
 reliably guessed::
 
-  >>> print typegetter.mimeTypeGetter(content_type="foo bar")
+  >>> print(typegetter.mimeTypeGetter(content_type="foo bar"))
   None
 
 This combines with ignoring the other values that may be provided as
 expected::
 
-  >>> print typegetter.mimeTypeGetter(
-  ...     name="file.html", data="<html>...</html>", content_type="foo bar")
+  >>> print(typegetter.mimeTypeGetter(
+  ...     name="file.html", data="<html>...</html>", content_type="foo bar"))
   None
 
 
@@ -107,7 +107,7 @@ the following pseudo-code::
 Let's see how this affects the results we saw earlier.  When there's
 no input to use, we still get None::
 
-  >>> print typegetter.mimeTypeGuesser()
+  >>> print(typegetter.mimeTypeGuesser())
   None
 
 Providing only the upload filename or data, or both, now produces a
@@ -151,7 +151,7 @@ the same way as for the `mimeTypeGetter()` function::
 If the content-type information is provided but malformed, it is
 ignored::
 
-  >>> print typegetter.mimeTypeGetter(content_type="foo bar")
+  >>> print(typegetter.mimeTypeGetter(content_type="foo bar"))
   None
 
 When combined with values for the filename or content data, those are
@@ -183,12 +183,12 @@ the content-type based on various heuristics.
 
 We still see the basic behavior that no input produces None::
 
-  >>> print typegetter.smartMimeTypeGuesser()
+  >>> print(typegetter.smartMimeTypeGuesser())
   None
 
 An unparsable content-type is still ignored::
 
-  >>> print typegetter.smartMimeTypeGuesser(content_type="foo bar")
+  >>> print(typegetter.smartMimeTypeGuesser(content_type="foo bar"))
   None
 
 The interpretation of uploaded data will be different in at least some
@@ -234,21 +234,21 @@ and ICharsetCodec utilities are registered for lowercase names.
 
 If it isn't, `charsetGetter` can try to guess by looking at actual data
 
-  >>> typegetter.charsetGetter(content_type='text/plain', data='just text')
+  >>> typegetter.charsetGetter(content_type='text/plain', data=b'just text')
   'ascii'
 
-  >>> typegetter.charsetGetter(content_type='text/plain', data='\xe2\x98\xba')
+  >>> typegetter.charsetGetter(content_type='text/plain', data=b'\xe2\x98\xba')
   'utf-8'
 
   >>> import codecs
-  >>> typegetter.charsetGetter(data=codecs.BOM_UTF16_BE + '\x12\x34')
+  >>> typegetter.charsetGetter(data=codecs.BOM_UTF16_BE + b'\x12\x34')
   'utf-16be'
 
-  >>> typegetter.charsetGetter(data=codecs.BOM_UTF16_LE + '\x12\x34')
+  >>> typegetter.charsetGetter(data=codecs.BOM_UTF16_LE + b'\x12\x34')
   'utf-16le'
 
 If the character set cannot be determined, `charsetGetter` returns None.
 
-  >>> typegetter.charsetGetter(content_type='text/plain', data='\xff')
+  >>> typegetter.charsetGetter(content_type='text/plain', data=b'\xff')
   >>> typegetter.charsetGetter()
 

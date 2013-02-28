@@ -13,7 +13,7 @@ utilities for ICodec with the name of their python codec.
    >>> addCodec('iso8859-1', 'Western (ISO-8859-1)')
    >>> codec = component.getUtility(ICodec, name='iso8859-1')
    >>> codec
-   <zope.mimetype.codec.Codec instance at ...>
+   <zope.mimetype.codec.Codec ...>
    >>> codec.name
    'iso8859-1'
    >>> addCodec('utf-8', 'Unicode (UTF-8)')
@@ -32,7 +32,7 @@ as a utility for ICharsetCodec with the name of the charset.
    >>> addCharset(codec.name, 'latin1')
    >>> charset = component.getUtility(ICharset, name='latin1')
    >>> charset
-   <zope.mimetype.codec.Charset instance at ...>
+   <zope.mimetype.codec.Charset ...>
    >>> charset.name
    'latin1'
    >>> component.getUtility(ICharsetCodec, name='latin1') is codec
@@ -57,12 +57,12 @@ ICodecPreferredCharset under the name of the python codec.
    >>> from zope.mimetype.interfaces import ICodecPreferredCharset
    >>> preferred = component.getUtility(ICodecPreferredCharset, name='iso8859-1')
    >>> preferred
-   <zope.mimetype.codec.Charset instance at ...>
+   <zope.mimetype.codec.Charset ...>
    >>> preferred.name
    'iso8859-1'
    >>> sorted(component.getUtilitiesFor(ICodecPreferredCharset))
-   [(u'iso8859-1', <zope.mimetype.codec.Charset instance at ...>),
-    (u'utf-8', <zope.mimetype.codec.Charset instance at ...>)]
+   [(u'iso8859-1', <zope.mimetype.codec.Charset ...>),
+    (u'utf-8', <zope.mimetype.codec.Charset ...>)]
 
 We can look up a codec by the name of its charset:
 
@@ -74,8 +74,8 @@ We can look up a codec by the name of its charset:
 Or we can look up all codecs:
 
    >>> sorted(component.getUtilitiesFor(ICharsetCodec))
-   [(u'iso8859-1', <zope.mimetype.codec.Codec instance at ...>),
-    (u'latin1', <zope.mimetype.codec.Codec instance at ...>),
-    (u'test', <zope.mimetype.codec.Codec instance at ...>),
-    (u'utf-8', <zope.mimetype.codec.Codec instance at ...>)]
+   [(u'iso8859-1', <zope.mimetype.codec.Codec ...>),
+    (u'latin1', <zope.mimetype.codec.Codec ...>),
+    (u'test', <zope.mimetype.codec.Codec ...>),
+    (u'utf-8', <zope.mimetype.codec.Codec ...>)]
 

@@ -11,9 +11,9 @@ Let's start the demonstration by defining a subscriber for the event
 that simply prints out the information from the event object::
 
   >>> def handler(event):
-  ...     print "changed content type interface:"
-  ...     print "  from:", event.oldContentType
-  ...     print "    to:", event.newContentType
+  ...     print("changed content type interface:")
+  ...     print("  from:", event.oldContentType)
+  ...     print("    to:", event.newContentType)
 
 We'll also define a simple content object::
 

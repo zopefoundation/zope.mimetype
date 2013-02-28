@@ -11,16 +11,18 @@
 #
 ##############################################################################
 """Utility helpers
-
-$Id$
 """
+try:
+    from email.Charset import Charset
+except ImportError:
+    # Py3: Changed package name.
+    from email.charset import Charset
 
-from email.Charset import Charset
 
 def decode(s, charset_name):
     "given a string and a IANA character set name, decode string to unicode"
     codec = Charset(charset_name).input_codec
     if codec is None:
-        return unicode(s)
+        return s.decode()
     else:
-        return unicode(s, codec)
+        return s.decode(codec)

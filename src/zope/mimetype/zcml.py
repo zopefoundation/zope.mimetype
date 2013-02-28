@@ -20,7 +20,7 @@ from i18n import _
 
 from zope.mimetype import codec
 from zope.mimetype import interfaces
-from zope.mimetype import types
+from zope.mimetype import mtypes
 
 import zope.browserresource.metaconfigure
 import zope.component.zcml
@@ -53,13 +53,13 @@ class IMimeTypesDirective(interface.Interface):
 def mimeTypesDirective(_context, file, module):
     codec.initialize(_context)
     directory = os.path.dirname(file)
-    data = types.read(file)
+    data = mtypes.read(file)
     provides = interfaces.IContentTypeInterface
     for name, info in data.iteritems():
         iface = getattr(module, name, None)
         if iface is None:
             # create missing interface
-            iface = types.makeInterface(
+            iface = mtypes.makeInterface(
                 name, info, getattr(module, "__name__", None))
             setattr(module, name, iface)
         # Register the interface as a utility:

@@ -17,6 +17,7 @@ We will borrow the boring set up code from the SourceSelectWidget test
     ... class SourceList(list):
     ...     pass
 
+    >>> import base64, binascii
     >>> import zope.publisher.interfaces.browser
     >>> from zope.browser.interfaces import ITerms
     >>> from zope.schema.vocabulary import SimpleTerm
@@ -27,9 +28,9 @@ We will borrow the boring set up code from the SourceSelectWidget test
     ...         pass # We don't actually need the source or the request :)
     ...
     ...     def getTerm(self, value):
-    ...         title = unicode(value)
+    ...         title = value.decode() if isinstance(value, bytes) else value
     ...         try:
-    ...             token = title.encode('base64').strip()
+    ...             token = base64.b64encode(title.encode()).strip().decode()
     ...         except binascii.Error:
     ...             raise LookupError(token)
     ...         return SimpleTerm(value, token=token, title=title)
@@ -57,7 +58,7 @@ a widget.
     >>> widget = TranslatableSourceSelectWidget(
     ...     dog, dog.source, request)
 
-    >>> print widget()
+    >>> print(widget())
     <div>
     <div class="value">
     <select id="field.dog" name="field.dog" size="5" >
@@ -77,7 +78,7 @@ If the field is not required, we will also see a special choice labeled
 "(nothing selected)" at the top of the list
 
     >>> dog.required = False
-    >>> print widget()
+    >>> print(widget())
     <div>
     <div class="value">
     <select id="field.dog" name="field.dog" size="5" >

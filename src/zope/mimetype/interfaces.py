@@ -11,10 +11,7 @@
 #
 ##############################################################################
 """interfaces for mimetype package
-
-$Id$
 """
-
 import re
 
 import zope.component.interfaces
@@ -22,7 +19,7 @@ import zope.schema.interfaces
 
 from zope import interface, schema
 from zope.configuration.fields import MessageID
-from i18n import _
+from zope.mimetype.i18n import _
 
 
 # Note that MIME types and content type parameter names are considered

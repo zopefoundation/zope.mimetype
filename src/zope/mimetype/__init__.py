@@ -1,1 +1,1 @@
-import types
+from zope.mimetype import mtypes
