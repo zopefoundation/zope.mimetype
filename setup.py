@@ -25,7 +25,7 @@ def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
 setup(name='zope.mimetype',
-      version='2.0.0a1.dev',
+      version='2.0.0a1',
       author='Zope Foundation and Contributors',
       author_email='zope-dev@zope.org',
       description = "A simple package for working with MIME content types",
