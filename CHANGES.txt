@@ -5,7 +5,10 @@ CHANGES
 2.0.0a2 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Restore the ability to write `from zope.mimetype import types`.
+
+- Make `configure.zcml` respect the renaming of the `types` module
+  so that it can be loaded.
 
 
 2.0.0a1 (2013-02-27)
@@ -18,6 +21,8 @@ CHANGES
 
 - Replaced deprecated ``zope.interface.implements`` usage with equivalent
   ``zope.interface.implementer`` decorator.
+
+- Renamed `zope.mimetype.types` to `zope.mimetype.mtypes`.
 
 - Dropped support for Python 2.4 and 2.5.
 

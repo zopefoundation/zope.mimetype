@@ -3,7 +3,7 @@
     i18n_domain="zope.mimetype">
 
   <mimeTypes
-      module=".types"
+      module=".mtypes"
       file="types.csv"
       />
 
