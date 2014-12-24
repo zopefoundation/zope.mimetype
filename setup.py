@@ -22,7 +22,8 @@ import os
 from setuptools import setup, find_packages
 
 def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+    with open(os.path.join(os.path.dirname(__file__), *rnames)) as f:
+        return f.read()
 
 setup(name='zope.mimetype',
       version='2.0.0a2.dev0',
@@ -30,7 +31,7 @@ setup(name='zope.mimetype',
       author_email='zope-dev@zope.org',
       description = "A simple package for working with MIME content types",
       long_description=(
-          read('README.txt')
+          read('README.rst')
           + '\n\n' +
           '.. contents::'
           + '\n\n' +
@@ -54,7 +55,7 @@ setup(name='zope.mimetype',
           + '\n\n' +
           read('src', 'zope', 'mimetype', 'utils.txt')
           + '\n\n' +
-          read('CHANGES.txt')
+          read('CHANGES.rst')
           ),
       keywords = "file content mimetype",
       classifiers = [
