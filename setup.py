@@ -33,8 +33,6 @@ setup(name='zope.mimetype',
       long_description=(
           read('README.rst')
           + '\n\n' +
-          '.. contents::'
-          + '\n\n' +
           read('src', 'zope', 'mimetype', 'README.txt')
           + '\n\n' +
           read('src', 'zope', 'mimetype', 'retrieving_mime_types.txt')

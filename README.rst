@@ -1,3 +1,9 @@
+``zope.mimetype``
+=================
+
+.. image:: https://travis-ci.org/zopefoundation/zope.mimetype.png?branch=master
+        :target: https://travis-ci.org/zopefoundation/zope.mimetype
+
 This package provides a way to work with MIME content types.  There
 are several interfaces defined here, many of which are used primarily
 to look things up based on different bits of information.
