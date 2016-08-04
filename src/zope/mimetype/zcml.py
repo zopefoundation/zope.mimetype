@@ -16,8 +16,8 @@ import os.path
 from zope import interface
 from zope import schema
 from zope.configuration import fields
-from i18n import _
 
+from zope.mimetype.i18n import _
 from zope.mimetype import codec
 from zope.mimetype import interfaces
 from zope.mimetype import mtypes
