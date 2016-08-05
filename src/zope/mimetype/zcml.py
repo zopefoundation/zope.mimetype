@@ -55,7 +55,7 @@ def mimeTypesDirective(_context, file, module):
     directory = os.path.dirname(file)
     data = mtypes.read(file)
     provides = interfaces.IContentTypeInterface
-    for name, info in data.iteritems():
+    for name, info in data.items():
         iface = getattr(module, name, None)
         if iface is None:
             # create missing interface

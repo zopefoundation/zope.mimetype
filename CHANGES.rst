@@ -8,6 +8,7 @@ Changes
 
 - Drop support for Python 2.6.
 
+- Fix configuring the package via its included ZCML on Python 3.
 
 2.0.0 (2014-12-24)
 --------------------
