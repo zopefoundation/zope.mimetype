@@ -91,10 +91,15 @@ def test_suite():
                 setUp=testing.setUp, tearDown=testing.tearDown,
                 checker=checker),
         doctest.DocFileSuite(
-            'codec.txt',
-            optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
-            checker=checker,
-            ),
+                'codec.txt',
+                optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
+                checker=checker,
+        ),
+        doctest.DocFileSuite(
+                'configure.txt',
+                setUp=testing.setUp, tearDown=testing.tearDown,
+                checker=checker
+        ),
         ))
 
 if __name__ == '__main__':

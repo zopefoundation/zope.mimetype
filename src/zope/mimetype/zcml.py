@@ -16,8 +16,8 @@ import os.path
 from zope import interface
 from zope import schema
 from zope.configuration import fields
-from i18n import _
 
+from zope.mimetype.i18n import _
 from zope.mimetype import codec
 from zope.mimetype import interfaces
 from zope.mimetype import mtypes
@@ -55,7 +55,7 @@ def mimeTypesDirective(_context, file, module):
     directory = os.path.dirname(file)
     data = mtypes.read(file)
     provides = interfaces.IContentTypeInterface
-    for name, info in data.iteritems():
+    for name, info in data.items():
         iface = getattr(module, name, None)
         if iface is None:
             # create missing interface
