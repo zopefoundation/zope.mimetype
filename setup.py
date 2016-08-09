@@ -26,7 +26,7 @@ def read(*rnames):
         return f.read()
 
 setup(name='zope.mimetype',
-      version='2.1.0',
+      version='2.2.0.dev0',
       author='Zope Foundation and Contributors',
       author_email='zope-dev@zope.org',
       description = "A simple package for working with MIME content types",
