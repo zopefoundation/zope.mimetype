@@ -12,6 +12,7 @@
 ##############################################################################
 """Test harness for `zope.mimetype` doctests..
 """
+from __future__ import print_function
 
 import doctest
 import re
