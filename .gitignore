@@ -11,3 +11,5 @@ build/
 develop-eggs/
 eggs/
 parts/
+.coverage
+htmlcov/

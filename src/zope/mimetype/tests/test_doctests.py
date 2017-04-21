@@ -10,15 +10,13 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Test harness for `zope.mimetype`.
+"""Test harness for `zope.mimetype` doctests..
 """
-from __future__ import print_function
+from __future__ import print_function, absolute_import
 import doctest
 import re
 import unittest
 
-import zope.interface
-import zope.mimetype.interfaces
 from zope.component import testing
 from zope.testing import renormalizing
 
@@ -38,65 +36,45 @@ checker = renormalizing.RENormalizing([
      r"builtins"),
     ])
 
-class ISampleContentTypeOne(zope.interface.Interface):
-    """This is a sample content type interface."""
-ISampleContentTypeOne.setTaggedValue("title", u"Type One")
-ISampleContentTypeOne.setTaggedValue("extensions", [])
-ISampleContentTypeOne.setTaggedValue("mimeTypes", ["type/one", "type/foo"])
-
-zope.interface.directlyProvides(
-    ISampleContentTypeOne,
-    zope.mimetype.interfaces.IContentTypeInterface)
-
-class ISampleContentTypeTwo(zope.interface.Interface):
-    """This is a sample content type interface."""
-ISampleContentTypeTwo.setTaggedValue("title", u"Type Two")
-ISampleContentTypeTwo.setTaggedValue("mimeTypes", [".ct2", ".ct3"])
-ISampleContentTypeTwo.setTaggedValue("mimeTypes", ["type/two"])
-
-zope.interface.directlyProvides(
-    ISampleContentTypeTwo,
-    zope.mimetype.interfaces.IContentTypeInterface)
-
 def test_suite():
     return unittest.TestSuite((
         doctest.DocFileSuite(
-                'retrieving_mime_types.txt',
+                '../retrieving_mime_types.txt',
                 setUp=testing.setUp, tearDown=testing.tearDown,
                 checker=checker),
         doctest.DocFileSuite(
-                'event.txt',
+                '../event.txt',
                 setUp=testing.setUp, tearDown=testing.tearDown,
                 globs={'print_function': print_function},
                 checker=checker),
         doctest.DocFileSuite(
-                'source.txt',
+                '../source.txt',
                 setUp=testing.setUp, tearDown=testing.tearDown,
                 checker=checker),
         doctest.DocFileSuite(
-                'constraints.txt',
+                '../constraints.txt',
                 checker=checker),
         doctest.DocFileSuite(
-                'contentinfo.txt',
+                '../contentinfo.txt',
                 setUp=testing.setUp, tearDown=testing.tearDown,
                 checker=checker),
         doctest.DocFileSuite(
-                'typegetter.txt',
+                '../typegetter.txt',
                 checker=checker),
         doctest.DocFileSuite(
-                'utils.txt',
+                '../utils.txt',
                 checker=checker),
         doctest.DocFileSuite(
-                'widget.txt',
+                '../widget.txt',
                 setUp=testing.setUp, tearDown=testing.tearDown,
                 checker=checker),
         doctest.DocFileSuite(
-                'codec.txt',
+                '../codec.txt',
                 optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
                 checker=checker,
         ),
         doctest.DocFileSuite(
-                'configure.txt',
+                '../configure.txt',
                 setUp=testing.setUp, tearDown=testing.tearDown,
                 checker=checker
         ),

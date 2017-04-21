@@ -170,7 +170,7 @@ class IContentInfo(interface.Interface): # XXX
 
     When using MIME data from an object, an application should adapt
     the object to this interface to determine how it should be
-    interpreted.  This may be different from the information 
+    interpreted.  This may be different from the information
 
     """
 
@@ -237,6 +237,8 @@ class IMimeTypeGetter(interface.Interface):
         If a MIME type cannot be determined based on the input,
         this returns `None`.
 
+        :keyword bytes data: If given, the bytes data to get a MIME
+            type for. This may be examined for clues about the type.
         """
 
 
