@@ -1,12 +1,12 @@
 Changes
 =======
 
-2.2.0 (unreleased)
+2.2.0 (2017-04-24)
 ------------------
 
-- Fix ``typegetter.smartMimeTypeGuesser`` would raise ``TypeError`` on
-  Python 3 when the data was ``bytes`` and the ``content_type`` was
-  ``text/html``. See `issue 6 <https://github.com/zopefoundation/zope.mimetype/issues/6>`_.
+- Fix `issue 6 <https://github.com/zopefoundation/zope.mimetype/issues/6>`_:
+  ``typegetter.smartMimeTypeGuesser`` would raise ``TypeError`` on Python 3
+  when the data was ``bytes`` and the ``content_type`` was ``text/html``.
 
 - Add support for Python 3.6.
 
