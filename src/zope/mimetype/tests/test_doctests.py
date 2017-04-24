@@ -37,6 +37,7 @@ checker = renormalizing.RENormalizing([
      r"builtins"),
     ])
 
+
 def test_suite():
     return unittest.TestSuite((
         doctest.DocFileSuite(
@@ -79,7 +80,10 @@ def test_suite():
                 setUp=testing.setUp, tearDown=testing.tearDown,
                 checker=checker
         ),
-        ))
+    ))
 
-if __name__ == '__main__':
+
+additional_tests = test_suite # for 'python setup.py test'
+
+if __name__ == '__main__': # pragma: no cover
     unittest.main(defaultTest='test_suite')

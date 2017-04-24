@@ -28,7 +28,7 @@ def mimeTypeGetter(name=None, data=None, content_type=None):
         return None
     if content_type:
         try:
-            major, minor, _ = zope.contenttype.parse.parseOrdered(
+            major, minor, _params = zope.contenttype.parse.parseOrdered(
                 content_type)
         except ValueError:
             pass
@@ -47,9 +47,9 @@ def mimeTypeGuesser(name=None, data=None, content_type=None):
     mimeType = mimeTypeGetter(name=name, data=data, content_type=content_type)
 
     if name and not mimeType:
-        mimeType, _ = mimetypes.guess_type(name, strict=True)
+        mimeType, _encoding = mimetypes.guess_type(name, strict=True)
         if not mimeType:
-            mimeType, encoding = mimetypes.guess_type(name, strict=False)
+            mimeType, _encoding = mimetypes.guess_type(name, strict=False)
         #
         # XXX If `encoding` is not None, we should re-consider the
         # guess, since the encoding here is Content-Encoding, not
@@ -73,7 +73,7 @@ def smartMimeTypeGuesser(name=None, data=None, content_type=None):
     mimeType = mimeTypeGuesser(name=name, data=data, content_type=content_type)
 
     if data and mimeType == "text/html":
-        for prefix, _, _ in _xml_prefix_table:
+        for prefix, _mimetype, _charset in _xml_prefix_table:
             if data.startswith(prefix):
                 # don't use text/xml from the table, but take
                 # advantage of the text/html hint (from the upload

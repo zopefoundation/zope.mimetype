@@ -16,6 +16,7 @@ import unittest
 
 from zope.mimetype import typegetter
 
+
 class TestMimeTypeGuesser(unittest.TestCase):
 
     def test_bytes_data_and_no_mime_type_or_name(self):
@@ -47,6 +48,7 @@ class TestSmartMimeTypeGuesser(unittest.TestCase):
         mimeType = typegetter.smartMimeTypeGuesser(data=b'I am bytes',
                                                    content_type='text/html')
         self.assertEqual('text/html', mimeType)
+
 
 def test_suite():
     return unittest.defaultTestLoader.loadTestsFromName(__name__)
