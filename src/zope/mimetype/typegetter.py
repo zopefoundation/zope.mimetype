@@ -28,7 +28,7 @@ def mimeTypeGetter(name=None, data=None, content_type=None):
         return None
     if content_type:
         try:
-            major, minor, params = zope.contenttype.parse.parseOrdered(
+            major, minor, _params = zope.contenttype.parse.parseOrdered(
                 content_type)
         except ValueError:
             pass
@@ -47,9 +47,9 @@ def mimeTypeGuesser(name=None, data=None, content_type=None):
     mimeType = mimeTypeGetter(name=name, data=data, content_type=content_type)
 
     if name and not mimeType:
-        mimeType, encoding = mimetypes.guess_type(name, strict=True)
+        mimeType, _encoding = mimetypes.guess_type(name, strict=True)
         if not mimeType:
-            mimeType, encoding = mimetypes.guess_type(name, strict=False)
+            mimeType, _encoding = mimetypes.guess_type(name, strict=False)
         #
         # XXX If `encoding` is not None, we should re-consider the
         # guess, since the encoding here is Content-Encoding, not
@@ -59,9 +59,9 @@ def mimeTypeGuesser(name=None, data=None, content_type=None):
 
     if data and not mimeType:
         # no idea, really, but let's sniff a few common things:
-        for prefix, type, charset in _prefix_table:
+        for prefix, sniffed_type, _charset in _prefix_table:
             if data.startswith(prefix):
-                mimeType = type
+                mimeType = sniffed_type
                 break
 
     return mimeType
@@ -73,12 +73,13 @@ def smartMimeTypeGuesser(name=None, data=None, content_type=None):
     mimeType = mimeTypeGuesser(name=name, data=data, content_type=content_type)
 
     if data and mimeType == "text/html":
-        for prefix, type, charset in _xml_prefix_table:
+        for prefix, _mimetype, _charset in _xml_prefix_table:
             if data.startswith(prefix):
                 # don't use text/xml from the table, but take
                 # advantage of the text/html hint (from the upload
                 # or mimetypes.guess_type())
                 mimeType = "application/xhtml+xml"
+                break
 
     return mimeType
 
@@ -90,19 +91,19 @@ interface.directlyProvides(smartMimeTypeGuesser, interfaces.IMimeTypeGetter)
 #
 _xml_prefix_table = (
     # prefix, mimeType, charset
-    ("<?xml",                   "text/xml",     None),
-    ("\xef\xbb\xbf<?xml",       "text/xml",     "utf-8"),    # w/ BOM
-    ("\0<\0?\0x\0m\0l",         "text/xml",     "utf-16be"),
-    ("<\0?\0x\0m\0l\0",         "text/xml",     "utf-16le"),
-    ("\xfe\xff\0<\0?\0x\0m\0l", "text/xml",     "utf-16be"), # w/ BOM
-    ("\xff\xfe<\0?\0x\0m\0l\0", "text/xml",     "utf-16le"), # w/ BOM
+    (b"<?xml",                   "text/xml",     None),
+    (b"\xef\xbb\xbf<?xml",       "text/xml",     "utf-8"),    # w/ BOM
+    (b"\0<\0?\0x\0m\0l",         "text/xml",     "utf-16be"),
+    (b"<\0?\0x\0m\0l\0",         "text/xml",     "utf-16le"),
+    (b"\xfe\xff\0<\0?\0x\0m\0l", "text/xml",     "utf-16be"), # w/ BOM
+    (b"\xff\xfe<\0?\0x\0m\0l\0", "text/xml",     "utf-16le"), # w/ BOM
     )
 _prefix_table = _xml_prefix_table + (
-    ("<html",                   "text/html",    None),
-    ("<HTML",                   "text/html",    None),
-    ("GIF89a",                  "image/gif",    None),
+    (b"<html",                   "text/html",    None),
+    (b"<HTML",                   "text/html",    None),
+    (b"GIF89a",                  "image/gif",    None),
     # PNG Signature: bytes 137 80 78 71 13 10 26 10
-    ("\x89PNG\r\n\x1a\n",       "image/png",    None),
+    (b"\x89PNG\r\n\x1a\n",       "image/png",    None),
     )
 
 
