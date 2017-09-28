@@ -9,6 +9,7 @@ Changes
 - Move the dependencies on ``zope.browser``, ``zope.publisher`` and
   ``zope.formlib`` (only needed to use the ``source`` and ``widget``
   modules) into a new ``browser`` extra.
+  See `PR 8 <https://github.com/zopefoundation/zope.mimetype/pull/8>`_.
 
 2.2.0 (2017-04-24)
 ------------------
