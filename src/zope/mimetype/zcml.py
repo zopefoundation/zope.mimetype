@@ -22,7 +22,13 @@ from zope.mimetype import codec
 from zope.mimetype import interfaces
 from zope.mimetype import mtypes
 
-import zope.browserresource.metaconfigure
+try:
+    from zope.browserresource.metaconfigure import icon
+except ImportError:
+    def icon(*args):
+        import warnings
+        warnings.warn("No icon support: zope.browserresource is not installed")
+
 import zope.component.zcml
 import zope.component.interface
 
@@ -76,10 +82,9 @@ def mimeTypesDirective(_context, file, module):
                 callable = zope.component.zcml.handler,
                 args = ('registerUtility', iface, provides, mime_type),
                 )
-        icon = os.path.join(directory, info[3])
-        if icon and os.path.isfile(icon):
-            zope.browserresource.metaconfigure.icon(
-                _context, "zmi_icon", iface, icon)
+        icon_path = os.path.join(directory, info[3])
+        if icon_path and os.path.isfile(icon_path):
+            icon(_context, "zmi_icon", iface, icon_path)
 
 
 class ICodecDirective(interface.Interface):

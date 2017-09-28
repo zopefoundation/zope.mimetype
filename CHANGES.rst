@@ -1,10 +1,14 @@
 Changes
 =======
 
-2.2.1 (unreleased)
+2.3.0 (unreleased)
 ------------------
 
-- TBD
+- Drop support for Python 3.3.
+
+- Move the dependencies on ``zope.browser``, ``zope.publisher`` and
+  ``zope.formlib`` (only needed to use the ``source`` and ``widget``
+  modules) into a new ``browser`` extra.
 
 2.2.0 (2017-04-24)
 ------------------

@@ -1,5 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="zope.mimetype">
 
   <include package="zope.component" file="meta.zcml" />
@@ -21,25 +22,29 @@
       />
 
   <adapter factory=".contentinfo.ContentInfo"/>
-  <adapter factory=".source.CodecTerms"/>
-  <adapter factory=".source.ContentTypeTerms"/>
 
-  <view
-      type="zope.publisher.interfaces.browser.IBrowserRequest"
-      for="zope.schema.interfaces.IChoice
-           zope.mimetype.interfaces.ICodecSource"
-      provides="zope.formlib.interfaces.IInputWidget"
-      factory=".widget.TranslatableSourceDropdownWidget"
-      permission="zope.Public"
-      />
+  <configure zcml:condition="installed zope.browser">
 
-  <view
-      type="zope.publisher.interfaces.browser.IBrowserRequest"
-      for="zope.schema.interfaces.IChoice
-           zope.mimetype.interfaces.IContentTypeSource"
-      provides="zope.formlib.interfaces.IInputWidget"
-      factory=".widget.TranslatableSourceDropdownWidget"
-      permission="zope.Public"
-      />
+    <adapter factory=".source.CodecTerms"/>
+    <adapter factory=".source.ContentTypeTerms"/>
+
+    <view
+        type="zope.publisher.interfaces.browser.IBrowserRequest"
+        for="zope.schema.interfaces.IChoice
+             zope.mimetype.interfaces.ICodecSource"
+        provides="zope.formlib.interfaces.IInputWidget"
+        factory=".widget.TranslatableSourceDropdownWidget"
+        permission="zope.Public"
+        />
+
+    <view
+        type="zope.publisher.interfaces.browser.IBrowserRequest"
+        for="zope.schema.interfaces.IChoice
+             zope.mimetype.interfaces.IContentTypeSource"
+        provides="zope.formlib.interfaces.IInputWidget"
+        factory=".widget.TranslatableSourceDropdownWidget"
+        permission="zope.Public"
+        />
+  </configure>
 
 </configure>
