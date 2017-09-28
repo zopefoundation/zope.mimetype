@@ -25,38 +25,50 @@ def read(*rnames):
     with open(os.path.join(os.path.dirname(__file__), *rnames)) as f:
         return f.read()
 
+BROWSER_REQUIRES = [
+    'zope.browser', # ITerms in source.py
+    'zope.browserresource', # metaconfigure for icon in zcml.py
+    'zope.formlib>=4.0', # widget.py
+    'zope.publisher', # IBrowserRequest
+]
+
+TEST_REQUIRES = BROWSER_REQUIRES + [
+    'zope.testing',
+    'zope.testrunner',
+]
+
 setup(name='zope.mimetype',
-      version='2.2.1.dev0',
+      version='2.3.0.dev0',
       author='Zope Foundation and Contributors',
       author_email='zope-dev@zope.org',
-      description = "A simple package for working with MIME content types",
+      description="A simple package for working with MIME content types",
       long_description=(
           read('README.rst')
           + '\n\n' +
-          read('src', 'zope', 'mimetype', 'README.txt')
+          read('src', 'zope', 'mimetype', 'README.rst')
           + '\n\n' +
-          read('src', 'zope', 'mimetype', 'retrieving_mime_types.txt')
+          read('src', 'zope', 'mimetype', 'retrieving_mime_types.rst')
           + '\n\n' +
-          read('src', 'zope', 'mimetype', 'codec.txt')
+          read('src', 'zope', 'mimetype', 'codec.rst')
           + '\n\n' +
-          read('src', 'zope', 'mimetype', 'constraints.txt')
+          read('src', 'zope', 'mimetype', 'constraints.rst')
           + '\n\n' +
-          read('src', 'zope', 'mimetype', 'contentinfo.txt')
+          read('src', 'zope', 'mimetype', 'contentinfo.rst')
           + '\n\n' +
-          read('src', 'zope', 'mimetype', 'event.txt')
+          read('src', 'zope', 'mimetype', 'event.rst')
           + '\n\n' +
-          read('src', 'zope', 'mimetype', 'typegetter.txt')
+          read('src', 'zope', 'mimetype', 'typegetter.rst')
           + '\n\n' +
-          read('src', 'zope', 'mimetype', 'source.txt')
+          read('src', 'zope', 'mimetype', 'source.rst')
           + '\n\n' +
-          read('src', 'zope', 'mimetype', 'widget.txt')
+          read('src', 'zope', 'mimetype', 'widget.rst')
           + '\n\n' +
-          read('src', 'zope', 'mimetype', 'utils.txt')
+          read('src', 'zope', 'mimetype', 'utils.rst')
           + '\n\n' +
           read('CHANGES.rst')
-          ),
-      keywords = "file content mimetype",
-      classifiers = [
+      ),
+      keywords="file content mimetype",
+      classifiers=[
           'Development Status :: 5 - Production/Stable',
           'Environment :: Web Environment',
           'Intended Audience :: Developers',
@@ -65,7 +77,6 @@ setup(name='zope.mimetype',
           'Programming Language :: Python :: 2',
           'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3',
-          'Programming Language :: Python :: 3.3',
           'Programming Language :: Python :: 3.4',
           'Programming Language :: Python :: 3.5',
           'Programming Language :: Python :: 3.6',
@@ -75,37 +86,29 @@ setup(name='zope.mimetype',
           'Operating System :: OS Independent',
           'Topic :: Internet :: WWW/HTTP',
           'Framework :: Zope3'],
-      url='http://pypi.python.org/pypi/zope.mimetype',
+      url='https://github.com/zopefoundation/zope.mimetype',
       license='ZPL 2.1',
       packages=find_packages('src'),
-      package_dir = {'': 'src'},
+      package_dir={'': 'src'},
       namespace_packages=['zope'],
-      extras_require = dict(
-        test=[
-            'zope.component',
-            'zope.testing',
-            ]
-        ),
-      install_requires=['setuptools',
-                        'zope.browser',
-                        'zope.browserresource',
-                        'zope.component',
-                        'zope.configuration',
-                        'zope.contenttype>=3.5',
-                        'zope.event',
-                        'zope.formlib>=4.0',
-                        'zope.i18n',
-                        'zope.i18nmessageid',
-                        'zope.interface',
-                        'zope.publisher',
-                        'zope.schema',
-                        'zope.security',
-                        ],
-      tests_require=[
-            'zope.component',
-            'zope.testing',
-            ],
+      extras_require={
+          'test': TEST_REQUIRES,
+          'browser': BROWSER_REQUIRES,
+      },
+      install_requires=[
+          'setuptools',
+          'zope.component',
+          'zope.configuration',
+          'zope.contenttype>=3.5',
+          'zope.event',
+          'zope.i18n',
+          'zope.i18nmessageid',
+          'zope.interface',
+          'zope.schema',
+          'zope.security',
+      ],
+      tests_require=TEST_REQUIRES,
       test_suite='zope.mimetype.tests',
-      include_package_data = True,
-      zip_safe = False,
-      )
+      include_package_data=True,
+      zip_safe=False,
+)

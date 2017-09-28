@@ -37,48 +37,58 @@ checker = renormalizing.RENormalizing([
      r"builtins"),
     ])
 
+def optional_test_suite_setUp(required_module):
+
+    def setUp(test):
+        import importlib
+        try:
+            importlib.import_module(required_module)
+        except ImportError:
+            raise unittest.SkipTest("Required module %r missing" % (required_module,))
+        testing.setUp(test)
+    return setUp
 
 def test_suite():
     return unittest.TestSuite((
         doctest.DocFileSuite(
-                '../retrieving_mime_types.txt',
-                setUp=testing.setUp, tearDown=testing.tearDown,
-                checker=checker),
+            '../retrieving_mime_types.rst',
+            setUp=testing.setUp, tearDown=testing.tearDown,
+            checker=checker),
         doctest.DocFileSuite(
-                '../event.txt',
-                setUp=testing.setUp, tearDown=testing.tearDown,
-                globs={'print_function': print_function},
-                checker=checker),
+            '../event.rst',
+            setUp=testing.setUp, tearDown=testing.tearDown,
+            globs={'print_function': print_function},
+            checker=checker),
         doctest.DocFileSuite(
-                '../source.txt',
-                setUp=testing.setUp, tearDown=testing.tearDown,
-                checker=checker),
+            '../source.rst',
+            setUp=optional_test_suite_setUp('zope.browser'), tearDown=testing.tearDown,
+            checker=checker),
         doctest.DocFileSuite(
-                '../constraints.txt',
-                checker=checker),
+            '../constraints.rst',
+            checker=checker),
         doctest.DocFileSuite(
-                '../contentinfo.txt',
-                setUp=testing.setUp, tearDown=testing.tearDown,
-                checker=checker),
+            '../contentinfo.rst',
+            setUp=testing.setUp, tearDown=testing.tearDown,
+            checker=checker),
         doctest.DocFileSuite(
-                '../typegetter.txt',
-                checker=checker),
+            '../typegetter.rst',
+            checker=checker),
         doctest.DocFileSuite(
-                '../utils.txt',
-                checker=checker),
+            '../utils.rst',
+            checker=checker),
         doctest.DocFileSuite(
-                '../widget.txt',
-                setUp=testing.setUp, tearDown=testing.tearDown,
-                checker=checker),
+            '../widget.rst',
+            setUp=optional_test_suite_setUp('zope.publisher'), tearDown=testing.tearDown,
+            checker=checker),
         doctest.DocFileSuite(
-                '../codec.txt',
-                optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
-                checker=checker,
+            '../codec.rst',
+            optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
+            checker=checker,
         ),
         doctest.DocFileSuite(
-                '../configure.txt',
-                setUp=testing.setUp, tearDown=testing.tearDown,
-                checker=checker
+            '../configure.rst',
+            setUp=testing.setUp, tearDown=testing.tearDown,
+            checker=checker
         ),
     ))
 
