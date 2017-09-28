@@ -12,7 +12,7 @@ env:
 matrix:
   include:
     - python: 2.7
-      env: DEP=
+      env: DEP=no_such_extra
 install:
     - pip install -U pip setuptools
     - pip install -U coverage coveralls zope.testing zope.testrunner
