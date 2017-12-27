@@ -4,7 +4,8 @@ Changes
 2.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Only try to register the browser stuff in the ZCA when `zope.formlib` is
+  available as it breaks otherwise.
 
 
 2.3.0 (2017-09-28)
