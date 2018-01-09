@@ -23,7 +23,10 @@
 
   <adapter factory=".contentinfo.ContentInfo"/>
 
-  <configure zcml:condition="installed zope.browser">
+  <configure zcml:condition="installed zope.formlib">
+    <!-- Actually zope.browser is needed, too, but it is currently a direct
+         dependency of zope.formlib.
+    -->
 
     <adapter factory=".source.CodecTerms"/>
     <adapter factory=".source.ContentTypeTerms"/>
