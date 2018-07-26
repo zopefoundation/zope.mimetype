@@ -10,7 +10,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-
+from __future__ import absolute_import
 
 import unittest
 
@@ -37,6 +37,10 @@ class TestMimeTypeGuesser(unittest.TestCase):
         mimeType = typegetter.mimeTypeGuesser(data=b"\x89PNG\r\n\x1a\n")
         self.assertEqual('image/png', mimeType)
 
+    def test_name_provided_unguessable(self):
+        mimeType = typegetter.mimeTypeGuesser(name="something")
+        self.assertIsNone(mimeType)
+
 
 class TestSmartMimeTypeGuesser(unittest.TestCase):
 
@@ -48,6 +52,13 @@ class TestSmartMimeTypeGuesser(unittest.TestCase):
         mimeType = typegetter.smartMimeTypeGuesser(data=b'I am bytes',
                                                    content_type='text/html')
         self.assertEqual('text/html', mimeType)
+
+
+class TestCharsetGetter(unittest.TestCase):
+
+    def test_parse_bad_content_type(self):
+        charset = typegetter.charsetGetter(content_type="not a content type")
+        self.assertIsNone(charset)
 
 
 def test_suite():
