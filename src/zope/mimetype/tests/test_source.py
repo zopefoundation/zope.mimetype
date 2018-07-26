@@ -26,8 +26,6 @@ from zope.testing import cleanup
 
 from zope.mimetype.interfaces import ICodec
 from zope.mimetype.interfaces import ICodecTerm
-from zope.mimetype.source import CodecTerms
-from zope.mimetype.source import codecSource
 
 
 class TestCodecTerms(cleanup.CleanUp,
@@ -37,6 +35,17 @@ class TestCodecTerms(cleanup.CleanUp,
     assertRaisesRegex = getattr(unittest.TestCase,
                                 'assertRaisesRegex',
                                 unittest.TestCase.assertRaisesRegexp)
+
+    def _make_codec_terms(self, source=None):
+        try:
+            from zope.mimetype.source import CodecTerms
+            from zope.mimetype.source import codecSource
+        except ImportError: # pragma: no cover
+            raise unittest.SkipTest("Missing browser extra")
+
+        return CodecTerms(source if source is not None else codecSource,
+                          None)
+
 
     def setUp(self):
         from zope.configuration import xmlconfig
@@ -53,7 +62,7 @@ class TestCodecTerms(cleanup.CleanUp,
           </codec>
         </configure>
         """)
-        self.terms = CodecTerms(codecSource, None)
+        self.terms = self._make_codec_terms()
 
     def test_get_value(self):
         self.assertIsNotNone(self.terms.getValue('iso8859-1'))
@@ -63,7 +72,7 @@ class TestCodecTerms(cleanup.CleanUp,
             self.terms.getValue("Not a codec")
 
     def test_get_value_not_in_context(self):
-        self.terms = CodecTerms({}, None)
+        self.terms = self._make_codec_terms({})
         with self.assertRaisesRegex(LookupError, "codec not in source"):
             self.terms.getValue("iso8859-1")
 
