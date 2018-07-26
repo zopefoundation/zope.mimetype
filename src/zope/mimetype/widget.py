@@ -10,15 +10,16 @@ available for some of the titles.
 The implementation ignores these issues for now.
 
 """
-__docformat__ = "reStructuredText"
+from __future__ import absolute_import
 
+__docformat__ = "reStructuredText"
 
 import zope.formlib.source
 import zope.i18n
 
 
 class TranslatableSourceSelectWidget(
-    zope.formlib.source.SourceSelectWidget):
+        zope.formlib.source.SourceSelectWidget):
 
     def __init__(self, field, source, request):
         super(TranslatableSourceSelectWidget, self).__init__(
@@ -52,12 +53,10 @@ class TranslatableSourceSelectWidget(
         missing = self._toFormValue(self.context.missing_value)
 
         if self._displayItemForMissingValue and not self.context.required:
-            if missing in values:
-                render = self.renderSelectedItem
-            else:
-                render = self.renderItem
+            render = self.renderSelectedItem if missing in values else self.renderItem
 
-            missing_item = render(count,
+            missing_item = render(
+                count,
                 self.translate(self._messageNoValue),
                 missing,
                 self.name,
@@ -69,12 +68,10 @@ class TranslatableSourceSelectWidget(
         for value in self.order:
             item_text, token = self.displays[value]
 
-            if value in values:
-                render = self.renderSelectedItem
-            else:
-                render = self.renderItem
+            render = self.renderSelectedItem if value in values else self.renderItem
 
-            rendered_item = render(count,
+            rendered_item = render(
+                count,
                 item_text,
                 token,
                 self.name,

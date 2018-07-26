@@ -27,7 +27,7 @@ We will borrow the boring set up code from the SourceSelectWidget test
     >>> from zope.browser.interfaces import ITerms
     >>> from zope.schema.vocabulary import SimpleTerm
     >>> @zope.interface.implementer(ITerms)
-    ... class ListTerms:
+    ... class ListTerms(object):
     ...
     ...     def __init__(self, source, request):
     ...         pass # We don't actually need the source or the request :)
@@ -76,6 +76,8 @@ a widget.
     </div>
     <input name="field.dog-empty-marker" type="hidden" value="1" />
     </div>
+    >>> widget.textForValue(widget.vocabulary.terms.getTerm('spot'))
+    (u'spot', 'c3BvdA==')
 
 Note that the options are ordered alphabetically.
 
