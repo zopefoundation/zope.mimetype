@@ -24,7 +24,7 @@ from zope.mimetype import mtypes
 
 try:
     from zope.browserresource.metaconfigure import icon
-except ImportError:
+except ImportError: # pragma: no cover (coverage runs with the extra installed)
     def icon(*args):
         import warnings
         warnings.warn("No icon support: zope.browserresource is not installed")
@@ -38,7 +38,7 @@ class IMimeTypesDirective(interface.Interface):
 
     Example::
 
-      <zope:mimeDefinitions file='types.csv'/>
+      <zope:mimeTypes file='types.csv' module="zope.mimetype.interfaces" />
 
     """
 
