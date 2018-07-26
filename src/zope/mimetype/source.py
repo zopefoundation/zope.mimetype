@@ -179,16 +179,16 @@ class CodecTerm(object):
             name=self.value.name)
         if charset is None:
             available = [(name, charset)
-                         for (charset, name) in zope.component.getUtilitiesFor(
+                         for (name, charset) in zope.component.getUtilitiesFor(
                              zope.mimetype.interfaces.ICharset)
                          if charset.encoding == self.value.name]
-            if not available:
-                # no charsets are available; should not happen in practice
-                return None
-            # no charset marked preferred; pick one
-            available.sort()
-            charset = available[0][1]
-        return charset.name
+            if available:
+                # no charset marked preferred; pick one
+                available.sort()
+                charset = available[0][1]
+        # the case that charset is None, meaning no charsets are
+        # available, should not happen in practice
+        return charset.name if charset is not None else None
 
 
 codecSource = CodecSource()
