@@ -37,16 +37,6 @@ checker = renormalizing.RENormalizing([
      r"builtins"),
     ])
 
-def optional_test_suite_setUp(required_module):
-
-    def setUp(test):
-        import importlib
-        try:
-            importlib.import_module(required_module)
-        except ImportError:
-            raise unittest.SkipTest("Required module %r missing" % (required_module,))
-        testing.setUp(test)
-    return setUp
 
 def test_suite():
     return unittest.TestSuite((
@@ -61,7 +51,7 @@ def test_suite():
             checker=checker),
         doctest.DocFileSuite(
             '../source.rst',
-            setUp=optional_test_suite_setUp('zope.browser'), tearDown=testing.tearDown,
+            setUp=testing.setUp, tearDown=testing.tearDown,
             checker=checker),
         doctest.DocFileSuite(
             '../constraints.rst',
@@ -78,7 +68,7 @@ def test_suite():
             checker=checker),
         doctest.DocFileSuite(
             '../widget.rst',
-            setUp=optional_test_suite_setUp('zope.publisher'), tearDown=testing.tearDown,
+            setUp=testing.setUp, tearDown=testing.tearDown,
             checker=checker),
         doctest.DocFileSuite(
             '../codec.rst',
