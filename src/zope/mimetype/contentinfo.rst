@@ -1,5 +1,8 @@
-Minimal IContentInfo Implementation
-===================================
+=====================================
+ Minimal IContentInfo Implementation
+=====================================
+
+.. currentmodule:: zope.mimetype.interfaces
 
 The `zope.mimetype.contentinfo` module provides a minimal
 `IContentInfo` implementation that adds no information to what's
@@ -38,7 +41,7 @@ We can now create examples of both encoded and non-encoded content::
   >>> unencoded = Content("application/octet-stream")
   >>> zope.interface.alsoProvides(unencoded, IApplicationOctetStream)
 
-The minimal IContentInfo implementation only exposes the information
+The minimal ``IContentInfo`` implementation only exposes the information
 available to it from the base content object.  Let's take a look at
 the unencoded content first::
 
@@ -81,7 +84,7 @@ If we try this with encoded data, we get somewhat different behavior::
   >>> ci.contentType
   'text/plain;charset=utf-8'
 
-The `getCodec()` and `decode()` methods can be used to handle encoded
+The `IContentInfo.getCodec()` and `IContentInfo.decode()` methods can be used to handle encoded
 data using the encoding indicated by the ``charset`` parameter.  Let's
 store some UTF-8 data in a variable::
 
@@ -91,7 +94,7 @@ store some UTF-8 data in a variable::
 
 We want to be able to decode the data using the `IContentInfo`
 object.  Let's try getting the corresponding `ICodec` object using
-`getCodec()`::
+`IContentInfo.getCodec()`::
 
   >>> codec = ci.getCodec()
   Traceback (most recent call last):
@@ -145,7 +148,7 @@ Now that that's been initialized, let's try getting the codec again::
   >>> codec.decode(utf8_data)
   (u'\xab\xbb', 4)
 
-We can now check that the `decode()` method of the `IContentInfo` will
+We can now check that the ``decode()`` method of the `IContentInfo` will
 decode the entire data, returning the Unicode representation of the
 text::
 

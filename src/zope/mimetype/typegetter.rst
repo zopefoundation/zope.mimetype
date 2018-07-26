@@ -1,10 +1,15 @@
-MIME type and character set extraction
-======================================
+========================================
+ MIME type and character set extraction
+========================================
+
+.. currentmodule:: zope.mimetype.typegetter
 
 The `zope.mimetype.typegetter` module provides a selection of MIME
-type extractors and charset extractors.  These may be used to
-determine what the MIME type and character set for uploaded data
-should be.
+type extractors (implementations of
+`zope.mimetype.interfaces.IMimeTypeGetter`) and charset extractors
+(implementations of `zope.mimetype.interfaces.ICharsetGetter`).
+These may be used to determine what the MIME type and character set
+for uploaded data should be.
 
 These two interfaces represent the site policy regarding interpreting
 upload data in the face of missing or inaccurate input.
@@ -14,7 +19,7 @@ Let's go ahead and import the module::
   >>> from zope.mimetype import typegetter
 
 MIME types
-----------
+==========
 
 There are a number of interesting MIME-type extractors:
 
@@ -33,7 +38,7 @@ There are a number of interesting MIME-type extractors:
 
 
 `mimeTypeGetter()`
-~~~~~~~~~~~~~~~~~~
+------------------
 
 We'll start with the simplest, which does no content-based guessing at
 all, but uses the information provided by the browser directly.  If
@@ -89,7 +94,7 @@ expected::
 
 
 `mimeTypeGuesser()`
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 A more elaborate extractor that tries to work around completely
 missing information can be found as the `mimeTypeGuesser()` function.
@@ -173,7 +178,7 @@ result::
 
 
 `smartMimeTypeGuesser()`
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 The `smartMimeTypeGuesser()` function applies more knowledge to the
 process of determining the MIME-type to use.  Essentially, it takes
@@ -213,7 +218,7 @@ interface, however.
 
 
 `charsetGetter()`
-~~~~~~~~~~~~~~~~~
+-----------------
 
 If you're interested in the character set of textual data, you can use
 the `charsetGetter` function (which can also be registered as the

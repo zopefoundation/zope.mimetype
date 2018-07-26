@@ -45,26 +45,6 @@ setup(name='zope.mimetype',
       long_description=(
           read('README.rst')
           + '\n\n' +
-          read('src', 'zope', 'mimetype', 'README.rst')
-          + '\n\n' +
-          read('src', 'zope', 'mimetype', 'retrieving_mime_types.rst')
-          + '\n\n' +
-          read('src', 'zope', 'mimetype', 'codec.rst')
-          + '\n\n' +
-          read('src', 'zope', 'mimetype', 'constraints.rst')
-          + '\n\n' +
-          read('src', 'zope', 'mimetype', 'contentinfo.rst')
-          + '\n\n' +
-          read('src', 'zope', 'mimetype', 'event.rst')
-          + '\n\n' +
-          read('src', 'zope', 'mimetype', 'typegetter.rst')
-          + '\n\n' +
-          read('src', 'zope', 'mimetype', 'source.rst')
-          + '\n\n' +
-          read('src', 'zope', 'mimetype', 'widget.rst')
-          + '\n\n' +
-          read('src', 'zope', 'mimetype', 'utils.rst')
-          + '\n\n' +
           read('CHANGES.rst')
       ),
       keywords="file content mimetype",
@@ -94,6 +74,11 @@ setup(name='zope.mimetype',
       extras_require={
           'test': TEST_REQUIRES,
           'browser': BROWSER_REQUIRES,
+          'docs': [
+              'Sphinx',
+              'sphinx_rtd_theme',
+              'repoze.sphinx.autointerface',
+          ] + BROWSER_REQUIRES,
       },
       install_requires=[
           'setuptools',

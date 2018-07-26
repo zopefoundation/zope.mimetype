@@ -1,3 +1,7 @@
+===========
+ Utilities
+===========
+
 The utils module contains various helpers for working with data goverened
 by MIME content type information, as found in the HTTP Content-Type header:
 mime types and character sets.

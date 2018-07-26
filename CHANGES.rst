@@ -1,21 +1,22 @@
-Changes
-=======
+=========
+ Changes
+=========
 
-2.4 (unreleased)
-----------------
+2.4.0 (unreleased)
+==================
 
-- Nothing changed yet.
+- Documentation was moved to https://zopemimetype.readthedocs.io
 
 
 2.3.1 (2018-01-09)
-------------------
+==================
 
 - Only try to register the browser stuff in the ZCA when `zope.formlib` is
   available as it breaks otherwise.
 
 
 2.3.0 (2017-09-28)
-------------------
+==================
 
 - Drop support for Python 3.3.
 
@@ -25,7 +26,7 @@ Changes
   See `PR 8 <https://github.com/zopefoundation/zope.mimetype/pull/8>`_.
 
 2.2.0 (2017-04-24)
-------------------
+==================
 
 - Fix `issue 6 <https://github.com/zopefoundation/zope.mimetype/issues/6>`_:
   ``typegetter.smartMimeTypeGuesser`` would raise ``TypeError`` on Python 3
@@ -35,7 +36,7 @@ Changes
 
 
 2.1.0 (2016-08-09)
-------------------
+==================
 
 - Add support for Python 3.5.
 
@@ -44,7 +45,7 @@ Changes
 - Fix configuring the package via its included ZCML on Python 3.
 
 2.0.0 (2014-12-24)
---------------------
+==================
 
 - Add support for PyPy and PyPy3.
 
@@ -57,7 +58,7 @@ Changes
 
 
 2.0.0a1 (2013-02-27)
---------------------
+====================
 
 - Add support for Python 3.3.
 
@@ -73,13 +74,13 @@ Changes
 
 
 1.3.1 (2010-11-10)
-------------------
+==================
 
 - No longer dependg on ``zope.app.form`` in ``configure.zcml`` by using
   ``zope.formlib`` instead, where the needed interfaces are living now.
 
 1.3.0 (2010-06-26)
-------------------
+==================
 
 - Add testing dependency on ``zope.component[test]``.
 
@@ -88,7 +89,7 @@ Changes
 - Conform to repository policy.
 
 1.2.0 (2009-12-26)
-------------------
+==================
 
 - Convert functional tests to unit tests and get rid of all extra test
   dependencies as a result.
@@ -102,12 +103,12 @@ Changes
   that package.
 
 1.1.2 (2009-05-22)
-------------------
+==================
 
 - No longer depend on ``zope.app.component``.
 
 1.1.1 (2009-04-03)
-------------------
+==================
 
 - Fix wrong package version (version ``1.1.0`` was released as ``0.4.0`` at
   `pypi` but as ``1.1dev`` at `download.zope.org/distribution`)
@@ -115,13 +116,13 @@ Changes
 - Fix author email and home page address.
 
 1.1.0 (2007-11-01)
-------------------
+==================
 
 - Package data update.
 
 - First public release.
 
 1.0.0 (2007-??-??)
-------------------
+==================
 
 - Initial release.

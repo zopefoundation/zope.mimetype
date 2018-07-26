@@ -1,8 +1,11 @@
-Codec handling
-==============
+================
+ Codec handling
+================
+
+.. currentmodule:: zope.mimetype.interfaces
 
 We can create codecs programatically. Codecs are registered as
-utilities for ICodec with the name of their python codec.
+utilities for `ICodec` with the name of their python codec.
 
    >>> from zope import component
    >>> from zope.mimetype.interfaces import ICodec
@@ -19,8 +22,8 @@ utilities for ICodec with the name of their python codec.
    >>> codec2 = component.getUtility(ICodec, name='utf-8')
 
 We can programmatically add charsets to a given codec. This registers
-each charset as a named utility for ICharset. It also registers the codec
-as a utility for ICharsetCodec with the name of the charset.
+each charset as a named utility for `ICharset`. It also registers the codec
+as a utility for `ICharsetCodec` with the name of the charset.
 
    >>> from zope.mimetype.codec import addCharset
    >>> from zope.mimetype.interfaces import ICharset, ICharsetCodec
@@ -51,7 +54,7 @@ A codec can have at most one preferred charset.
    ValueError: Codec already has a preferred charset.
 
 Preferred charsets are registered as utilities for
-ICodecPreferredCharset under the name of the python codec.
+`ICodecPreferredCharset` under the name of the python codec.
 
    >>> from zope.mimetype.interfaces import ICodecPreferredCharset
    >>> preferred = component.getUtility(ICodecPreferredCharset, name='iso8859-1')
@@ -77,4 +80,3 @@ Or we can look up all codecs:
     (u'latin1', <zope.mimetype.codec.Codec ...>),
     (u'test', <zope.mimetype.codec.Codec ...>),
     (u'utf-8', <zope.mimetype.codec.Codec ...>)]
-
