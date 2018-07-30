@@ -49,6 +49,9 @@ class TestCodecTerms(cleanup.CleanUp,
 
     def setUp(self):
         from zope.configuration import xmlconfig
+
+        super(TestCodecTerms, self).setUp()
+
         xmlconfig.string("""
         <configure
             xmlns="http://namespaces.zope.org/zope"
