@@ -10,6 +10,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
+from __future__ import absolute_import
 
 import codecs
 import os
@@ -21,8 +22,8 @@ from zope.mimetype.interfaces import ICharset, ICodecPreferredCharset
 
 
 @interface.implementer(ICodec)
-class Codec:
-    
+class Codec(object):
+
     def __init__(self, name, title):
         self.name = name
         self.title = title
@@ -39,7 +40,7 @@ def addCodec(name, title=None):
 
 
 @interface.implementer(ICharset)
-class Charset:
+class Charset(object):
 
     def __init__(self, name, encoding):
         self.name = name
@@ -70,7 +71,7 @@ DATA_RE = re.compile(
 
 def initialize(_context):
     # if any ICodec has been registered, we're done:
-    for unused in component.getUtilitiesFor(ICodec):
+    for _ in component.getUtilitiesFor(ICodec):
         return
     _names = []
     _codecs = {}
@@ -106,7 +107,7 @@ def initialize(_context):
 
         type, name, preferred = m.groups()
         if type == "Name":
-            if name in _codecs:
+            if name in _codecs: # pragma: no cover (its our datafile, this shouldn't happen)
                 raise ValueError("codec %s already exists" % name)
             _names.append(name)
             lastname = name
@@ -115,10 +116,10 @@ def initialize(_context):
                 _codecs[name].preferred_alias = name.lower()
 
         elif type == "Alias" and name != "None":
-            if not lastname:
+            if not lastname: # pragma: no cover (its our datafile, this shouldn't happen)
                 raise ValueError("Parsing failed. Alias found without a name.")
             name = name.lower()
-            if name in _aliases:
+            if name in _aliases: # pragma: no cover (its our datafile, this shouldn't happen)
                 raise ValueError("Alias %s already exists." % name)
             codec = _codecs[lastname]
             codec.aliases.append(name)

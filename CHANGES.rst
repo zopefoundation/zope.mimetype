@@ -7,6 +7,10 @@
 
 - Documentation was moved to https://zopemimetype.readthedocs.io
 
+- Fix an AttributeError accessing the ``preferredCharset`` of an
+  ``ICodecTerm`` when no ``ICodecPreferredCharset`` was registered.
+
+- Reach and automatically require 100% test coverage.
 
 2.3.1 (2018-01-09)
 ==================
