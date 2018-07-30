@@ -1,5 +1,8 @@
-Source for MIME type interfaces
-===============================
+=================================
+ Source for MIME type interfaces
+=================================
+
+.. currentmodule:: zope.mimetype.interfaces
 
 Some sample interfaces have been created in the zope.mimetype.tests
 module for use in this test.  Let's import them::

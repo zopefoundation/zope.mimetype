@@ -1,5 +1,9 @@
-Events and content-type changes
-===============================
+=================================
+ Events and content-type changes
+=================================
+
+.. currentmodule:: zope.mimetype.interfaces
+
 
 The `IContentTypeChangedEvent` is fired whenever an object's
 `IContentTypeInterface` is changed.  This includes the cases when a
@@ -67,7 +71,7 @@ the interface does not affect the object and the event is not fired::
   >>> event.changeContentType(obj, None)
 
 Setting a content type interface on an object that doesn't have one
-will cause the event to be fired, with the `.oldContentType` attribute
+will cause the event to be fired, with the ``oldContentType`` attribute
 on the event set to `None`::
 
   >>> event.changeContentType(obj, ITextPlain)
@@ -75,7 +79,7 @@ on the event set to `None`::
     from: None
       to: <InterfaceClass __builtin__.ITextPlain>
 
-Calling the `changeContentType()` function again with the same "new"
+Calling the `~.changeContentType()` function again with the same "new"
 content type interface causes no change, so the event is not fired
 again::
 

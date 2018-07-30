@@ -24,6 +24,7 @@ import zope.contenttype.parse
 
 
 def mimeTypeGetter(name=None, data=None, content_type=None):
+    """A minimal extractor that never attempts to guess."""
     if name is None and data is None and content_type is None:
         return None
     if content_type:
@@ -41,6 +42,9 @@ interface.directlyProvides(mimeTypeGetter, interfaces.IMimeTypeGetter)
 
 
 def mimeTypeGuesser(name=None, data=None, content_type=None):
+    """An extractor that tries to guess the content type based on the
+    name and data if the input contains no content type information.
+    """
     if name is None and data is None and content_type is None:
         return None
 
@@ -70,6 +74,11 @@ interface.directlyProvides(mimeTypeGuesser, interfaces.IMimeTypeGetter)
 
 
 def smartMimeTypeGuesser(name=None, data=None, content_type=None):
+    """An extractor that checks the content for a variety of
+    constructs to try and refine the results of the
+    `mimeTypeGuesser()`. This is able to do things like check for
+    XHTML that's labelled as HTML in upload data.
+    """
     mimeType = mimeTypeGuesser(name=name, data=data, content_type=content_type)
 
     if data and mimeType == "text/html":
@@ -108,6 +117,7 @@ _prefix_table = _xml_prefix_table + (
 
 
 def charsetGetter(name=None, data=None, content_type=None):
+    """Default implementation of `zope.mimetype.interfaces.ICharsetGetter`."""
     if name is None and data is None and content_type is None:
         return None
     if content_type:

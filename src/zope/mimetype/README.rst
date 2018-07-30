@@ -1,5 +1,8 @@
-The Zope MIME Infrastructure
-============================
+==============================
+ The Zope MIME Infrastructure
+==============================
+
+.. currentmodule:: zope.mimetype.interfaces
 
 This package provides a way to work with MIME content types.  There
 are several interfaces defined here, many of which are used primarily
@@ -25,7 +28,7 @@ The default configuration provides direct support for a variety of
 common document types found in office environments.
 
 Supported lookups
------------------
+=================
 
 Several different queries are supported by this package:
 

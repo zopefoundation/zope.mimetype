@@ -1,7 +1,13 @@
+=========
+ Widgets
+=========
+
 TranslatableSourceSelectWidget
 ==============================
 
-TranslatableSourceSelectWidget is a SourceSelectWidget that translates
+.. currentmodule:: zope.mimetype.widget
+
+`TranslatableSourceSelectWidget` is a `.SourceSelectWidget` that translates
 and sorts the choices.
 
 We will borrow the boring set up code from the SourceSelectWidget test

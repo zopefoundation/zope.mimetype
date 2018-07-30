@@ -36,7 +36,7 @@ import zope.component.interface
 class IMimeTypesDirective(interface.Interface):
     """Request loading of a MIME type definition table.
 
-    Example:
+    Example::
 
       <zope:mimeDefinitions file='types.csv'/>
 
@@ -90,7 +90,7 @@ def mimeTypesDirective(_context, file, module):
 class ICodecDirective(interface.Interface):
     """Defines a codec.
 
-    Example:
+    Example::
 
        <zope:codec name="iso8859-1" title="Western (ISO-8859-1)">
           ...
@@ -112,7 +112,7 @@ class ICodecDirective(interface.Interface):
 class ICharsetDirective(interface.Interface):
     """Defines a charset in a codec.
 
-    Example:
+    Example::
 
        <charset name="iso8859-1" preferred="True" />
        <charset name="latin1" />

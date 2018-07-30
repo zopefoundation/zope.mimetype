@@ -1,17 +1,20 @@
-Constraint Functions for Interfaces
-===================================
+=====================================
+ Constraint Functions for Interfaces
+=====================================
 
-The `zope.mimetype.interfaces` module defines interfaces that use some
+.. currentmodule:: zope.mimetype.interfaces
+
+The :mod:`zope.mimetype.interfaces` module defines interfaces that use some
 helper functions to define constraints on the accepted data.  These
 helpers are used to determine whether values conform to the what's
 allowed for parts of a MIME type specification and other parts of a
 Content-Type header as specified in RFC 2045.
 
 Single Token
-------------
+============
 
 The first is the simplest:  the `tokenConstraint()` function returns
-`True` if the ASCII string it is passed conforms to the `token`
+`True` if the ASCII string it is passed conforms to the ``token``
 production in section 5.1 of the RFC.  Let's import the function::
 
   >>> from zope.mimetype.interfaces import tokenConstraint
@@ -84,7 +87,7 @@ Whitespace before or after the token is not accepted either::
   >>> tokenConstraint("plain ")
   False
 
-Other disallowed characters are defined in the `tspecials` production
+Other disallowed characters are defined in the ``tspecials`` production
 from the RFC (also in section 5.1)::
 
   >>> tokenConstraint("(")
@@ -126,7 +129,7 @@ returns false for an empty string::
 
 
 MIME Type
----------
+=========
 
 A MIME type is specified using two tokens separated by a slash;
 whitespace between the tokens and the slash must be normalized away in
