@@ -2,7 +2,7 @@
  Changes
 =========
 
-2.4.0 (unreleased)
+2.3.2 (2018-07-30)
 ==================
 
 - Documentation was moved to https://zopemimetype.readthedocs.io
