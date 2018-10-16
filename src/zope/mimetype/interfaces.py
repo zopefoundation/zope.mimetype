@@ -14,7 +14,7 @@
 """
 import re
 
-import zope.component.interfaces
+import zope.interface.interfaces
 import zope.schema.interfaces
 
 from zope import interface, schema
@@ -116,7 +116,7 @@ class IContentTypeEncoded(IContentType):
 interface.directlyProvides(IContentTypeEncoded, IContentTypeInterface)
 
 
-class IContentTypeChangedEvent(zope.component.interfaces.IObjectEvent):
+class IContentTypeChangedEvent(zope.interface.interfaces.IObjectEvent):
     """The content type for an object has changed.
 
     All changes of the `IContentTypeInterface` for an object are

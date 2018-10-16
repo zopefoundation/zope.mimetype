@@ -53,10 +53,10 @@ We'll also need a couple of content type interfaces::
 Let's register our subscriber::
 
   >>> import zope.component
-  >>> import zope.component.interfaces
+  >>> import zope.interface.interfaces
   >>> zope.component.provideHandler(
   ...     handler,
-  ...     (zope.component.interfaces.IObjectEvent,))
+  ...     (zope.interface.interfaces.IObjectEvent,))
 
 Changing the content type interface on an object is handled by the
 `zope.mimetype.event.changeContentType()` function.  Let's import that

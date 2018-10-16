@@ -16,14 +16,14 @@
 __docformat__ = "reStructuredText"
 
 import zope.event
-import zope.component.interfaces
+import zope.interface.interfaces
 import zope.interface
 import zope.mimetype.interfaces
 import zope.security.proxy
 
 
 @zope.interface.implementer(zope.mimetype.interfaces.IContentTypeChangedEvent)
-class ContentTypeChangedEvent(zope.component.interfaces.ObjectEvent):
+class ContentTypeChangedEvent(zope.interface.interfaces.ObjectEvent):
 
     def __init__(self, object, oldContentType, newContentType):
         super(ContentTypeChangedEvent, self).__init__(object)
