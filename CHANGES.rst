@@ -2,10 +2,14 @@
  Changes
 =========
 
-2.3.3 (unreleased)
+2.4.0 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Add support for Python 3.7.
+
+- Fix DeprecationWarnings for ``IObjectEvent`` and ``ObjectEvent`` by
+  importing them from ``zope.interface.interfaces``. See `issue 14
+  <https://github.com/zopefoundation/zope.mimetype/issues/14>`_.
 
 
 2.3.2 (2018-07-30)
