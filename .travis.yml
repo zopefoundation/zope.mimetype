@@ -7,17 +7,15 @@ python:
     - 3.6
     - pypy
     - pypy3
+env:
+    - DEP=test
 matrix:
     include:
         - python: "3.7"
           dist: xenial
           sudo: true
-env:
-    - DEP=test
-matrix:
-  include:
-    - python: 2.7
-      env: DEP=no_such_extra
+        - python: 2.7
+          env: DEP=no_such_extra
 install:
     - pip install -U pip setuptools
     - pip install -U coverage coveralls zope.testing zope.testrunner
