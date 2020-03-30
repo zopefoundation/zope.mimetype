@@ -1,21 +1,19 @@
 language: python
-sudo: false
 python:
     - 2.7
-    - 3.4
     - 3.5
     - 3.6
+    - 3.7
+    - 3.8
     - pypy
     - pypy3
 env:
-    - DEP=test
-matrix:
-    include:
-        - python: "3.7"
-          dist: xenial
-          sudo: true
-        - python: 2.7
-          env: DEP=no_such_extra
+  - DEP: test
+  - DEP: no_such_extra
+    # Cannot yet set this globally pending
+    # https://github.com/zopefoundation/zope.publisher/issues/49
+    ZOPE_INTERFACE_STRICT_IRO: 1
+
 install:
     - pip install -U pip setuptools
     - pip install -U coverage coveralls zope.testing zope.testrunner

@@ -160,8 +160,8 @@ class IContentTypeTerm(zope.schema.interfaces.ITitledTokenizedTerm):
         readonly=True,
         )
 
-class IContentTypeSource(zope.schema.interfaces.ISource,
-                         zope.schema.interfaces.IIterableSource):
+class IContentTypeSource(zope.schema.interfaces.IIterableSource,
+                         zope.schema.interfaces.ISource):
     """Source for content types."""
 
 
