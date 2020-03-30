@@ -2,10 +2,15 @@
  Changes
 =========
 
-2.4.1 (unreleased)
+2.5.0 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Add support for Python 3.8.
+
+- Drop support for Python 3.4.
+
+- Ensure all objects have consistent interface resolution orders. See
+  `issue 17 <https://github.com/zopefoundation/zope.mimetype/issues/17>`_.
 
 
 2.4.0 (2018-10-16)
