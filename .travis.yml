@@ -8,11 +8,12 @@ python:
     - pypy
     - pypy3
 env:
-  - DEP: test
-  - DEP: no_such_extra
-    # Cannot yet set this globally pending
-    # https://github.com/zopefoundation/zope.publisher/issues/49
-    ZOPE_INTERFACE_STRICT_IRO: 1
+  global:
+    - ZOPE_INTERFACE_STRICT_IRO: 1
+  jobs:
+    - DEP: test
+    - DEP: no_such_extra
+
 
 install:
     - pip install -U pip setuptools
