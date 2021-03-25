@@ -5,7 +5,7 @@
 2.5.1 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Fix test compatibility with zope.interface 5.4.
 
 
 2.5.0 (2020-03-30)
