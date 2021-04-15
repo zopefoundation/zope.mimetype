@@ -2,7 +2,7 @@
  Changes
 =========
 
-2.5.1 (unreleased)
+2.5.1 (2021-04-15)
 ==================
 
 - Fix test compatibility with zope.interface 5.4.
