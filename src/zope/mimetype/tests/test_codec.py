@@ -21,15 +21,17 @@ from __future__ import print_function
 
 import unittest
 
-from zope import component
 from zope.testing import cleanup
+
+from zope import component
+
 
 class TestCodecInitialize(cleanup.CleanUp,
                           unittest.TestCase):
 
     def test_does_nothing_if_codec_registered(self):
-        from zope.mimetype.interfaces import ICodec
         from zope.mimetype import codec
+        from zope.mimetype.interfaces import ICodec
 
         component.provideUtility(self, ICodec)
         codec.initialize(None)

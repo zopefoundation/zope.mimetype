@@ -15,10 +15,14 @@
 
 
 import zope.interface
+
 import zope.mimetype.interfaces
+
 
 class ISampleContentTypeOne(zope.interface.Interface):
     """This is a sample content type interface."""
+
+
 ISampleContentTypeOne.setTaggedValue("title", u"Type One")
 ISampleContentTypeOne.setTaggedValue("extensions", [])
 ISampleContentTypeOne.setTaggedValue("mimeTypes", ["type/one", "type/foo"])
@@ -27,8 +31,11 @@ zope.interface.directlyProvides(
     ISampleContentTypeOne,
     zope.mimetype.interfaces.IContentTypeInterface)
 
+
 class ISampleContentTypeTwo(zope.interface.Interface):
     """This is a sample content type interface."""
+
+
 ISampleContentTypeTwo.setTaggedValue("title", u"Type Two")
 ISampleContentTypeTwo.setTaggedValue("mimeTypes", [".ct2", ".ct3"])
 ISampleContentTypeTwo.setTaggedValue("mimeTypes", ["type/two"])

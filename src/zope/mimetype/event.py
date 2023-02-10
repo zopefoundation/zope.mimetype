@@ -16,10 +16,11 @@
 __docformat__ = "reStructuredText"
 
 import zope.event
-import zope.interface.interfaces
 import zope.interface
-import zope.mimetype.interfaces
+import zope.interface.interfaces
 import zope.security.proxy
+
+import zope.mimetype.interfaces
 
 
 @zope.interface.implementer(zope.mimetype.interfaces.IContentTypeChangedEvent)

@@ -12,6 +12,7 @@ The implementation ignores these issues for now.
 """
 from __future__ import absolute_import
 
+
 __docformat__ = "reStructuredText"
 
 import zope.formlib.source
@@ -53,7 +54,8 @@ class TranslatableSourceSelectWidget(
         missing = self._toFormValue(self.context.missing_value)
 
         if self._displayItemForMissingValue and not self.context.required:
-            render = self.renderSelectedItem if missing in values else self.renderItem
+            render = (self.renderSelectedItem if missing in values
+                      else self.renderItem)
 
             missing_item = render(
                 count,
@@ -68,7 +70,8 @@ class TranslatableSourceSelectWidget(
         for value in self.order:
             item_text, token = self.displays[value]
 
-            render = self.renderSelectedItem if value in values else self.renderItem
+            render = (self.renderSelectedItem if value in values
+                      else self.renderItem)
 
             rendered_item = render(
                 count,

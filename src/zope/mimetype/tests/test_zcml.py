@@ -21,16 +21,18 @@ from __future__ import print_function
 
 import unittest
 
-from zope import component
 from zope.configuration import xmlconfig
 from zope.testing import cleanup
+
+from zope import component
+
 
 class TestCodecDirective(cleanup.CleanUp,
                          unittest.TestCase):
 
     def test_codec(self):
-        from zope.mimetype.interfaces import ICodec
         from zope.mimetype.interfaces import ICharset
+        from zope.mimetype.interfaces import ICodec
 
         xmlconfig.string("""
         <configure

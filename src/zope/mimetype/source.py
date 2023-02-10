@@ -17,10 +17,11 @@ __docformat__ = "reStructuredText"
 
 import sys
 
-from zope.browser.interfaces import ITerms
 import zope.component
-import zope.mimetype.interfaces
 import zope.publisher.interfaces.browser
+from zope.browser.interfaces import ITerms
+
+import zope.mimetype.interfaces
 
 
 # Base classes
@@ -35,7 +36,7 @@ class UtilitySource(object):
         ok = self._interface.providedBy(value)
         if ok:
             for name, interface in zope.component.getUtilitiesFor(
-                self._interface):
+                    self._interface):
                 if interface is value:
                     return True
         return False
@@ -47,7 +48,7 @@ class UtilitySource(object):
         # haven't been iterated over all the way yet, go ahead and
         # build the cached results list
         for name, interface in zope.component.getUtilitiesFor(
-            self._interface):
+                self._interface):
             if interface not in seen:
                 seen.add(interface)
                 yield interface
@@ -83,8 +84,8 @@ class ContentTypeSource(UtilitySource):
 
 
 @zope.component.adapter(
-        zope.mimetype.interfaces.IContentTypeSource,
-        zope.publisher.interfaces.browser.IBrowserRequest)
+    zope.mimetype.interfaces.IContentTypeSource,
+    zope.publisher.interfaces.browser.IBrowserRequest)
 class ContentTypeTerms(Terms):
     """Utility to provide terms for content type interfaces."""
 
@@ -140,8 +141,8 @@ class CodecSource(UtilitySource):
 
 
 @zope.component.adapter(
-        zope.mimetype.interfaces.ICodecSource,
-        zope.publisher.interfaces.browser.IBrowserRequest)
+    zope.mimetype.interfaces.ICodecSource,
+    zope.publisher.interfaces.browser.IBrowserRequest)
 class CodecTerms(Terms):
     """Utility to provide terms for codecs."""
 

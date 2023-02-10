@@ -21,9 +21,9 @@ from __future__ import print_function
 
 import unittest
 
-from zope import interface
 from zope.testing import cleanup
 
+from zope import interface
 from zope.mimetype.contentinfo import ContentInfo
 
 
@@ -41,7 +41,6 @@ class TestContentinfo(cleanup.CleanUp,
         class Content(object):
             mimeType = 'text/plain'
             parameters = ()
-
 
         class Codec(object):
             def decode(self, s):

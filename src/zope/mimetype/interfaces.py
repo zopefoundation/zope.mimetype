@@ -16,9 +16,10 @@ import re
 
 import zope.interface.interfaces
 import zope.schema.interfaces
-
-from zope import interface, schema
 from zope.configuration.fields import MessageID
+
+from zope import interface
+from zope import schema
 from zope.mimetype.i18n import _
 
 
@@ -49,6 +50,7 @@ def mimeTypeConstraint(value):
     """Return `True` iff `value` is a syntactically legal MIME type."""
     return _mime_type_rx.match(value) is not None
 
+
 def tokenConstraint(value):
     """Return `True` iff `value` is a syntactically legal RFC 2045 token."""
     return _token_rx.match(value) is not None
@@ -68,7 +70,7 @@ class IContentTypeAware(interface.Interface):
         description=_("The MIME type parameters (such as charset)."),
         required=True,
         key_type=schema.ASCIILine(constraint=tokenConstraint)
-        )
+    )
 
     mimeType = schema.ASCIILine(
         title=_('Mime Type'),
@@ -78,7 +80,7 @@ class IContentTypeAware(interface.Interface):
                       " form major/minor."),
         constraint=mimeTypeConstraint,
         required=False,
-        )
+    )
 
 
 class IContentTypeInterface(interface.Interface):
@@ -96,6 +98,8 @@ class IContentTypeInterface(interface.Interface):
 class IContentType(interface.Interface):
     """Marker interface for objects that represent content with a MIME type.
     """
+
+
 interface.directlyProvides(IContentType, IContentTypeInterface)
 
 
@@ -113,6 +117,8 @@ class IContentTypeEncoded(IContentType):
     this base interface.
 
     """
+
+
 interface.directlyProvides(IContentTypeEncoded, IContentTypeInterface)
 
 
@@ -149,7 +155,7 @@ class IContentTypeTerm(zope.schema.interfaces.ITitledTokenizedTerm):
         min_length=1,
         value_type=schema.ASCIILine(constraint=mimeTypeConstraint),
         readonly=True,
-        )
+    )
 
     extensions = schema.List(
         title=_("Extensions"),
@@ -158,14 +164,15 @@ class IContentTypeTerm(zope.schema.interfaces.ITitledTokenizedTerm):
         required=True,
         min_length=0,
         readonly=True,
-        )
+    )
+
 
 class IContentTypeSource(zope.schema.interfaces.IIterableSource,
                          zope.schema.interfaces.ISource):
     """Source for content types."""
 
 
-class IContentInfo(interface.Interface): # XXX
+class IContentInfo(interface.Interface):  # XXX
     """Interface describing effective MIME type information.
 
     When using MIME data from an object, an application should adapt
@@ -181,7 +188,7 @@ class IContentInfo(interface.Interface): # XXX
                       " object is for."),
         required=False,
         constraint=mimeTypeConstraint,
-        )
+    )
 
     effectiveParameters = schema.Dict(
         title=_("Effective parameters"),
@@ -191,14 +198,14 @@ class IContentInfo(interface.Interface): # XXX
         required=True,
         key_type=schema.ASCIILine(constraint=tokenConstraint),
         value_type=schema.ASCII(),
-        )
+    )
 
     contentType = schema.ASCIILine(
         title=_("Content type"),
         description=_("The value of the Content-Type header,"
                       " including both the MIME type and any parameters."),
         required=False,
-        )
+    )
 
     def getCodec():
         """Return an `ICodec` that should be used to decode/encode data.
@@ -261,13 +268,13 @@ class ICodec(interface.Interface):
         title=_('Name'),
         description=_('The name of the Python codec.'),
         required=True,
-        )
+    )
 
     title = MessageID(
         title=_('Title'),
         description=_('The human-readable name of this codec.'),
         required=True,
-        )
+    )
 
     def encode(input, errors='strict'):
         """Encodes the input and returns a tuple (output, length consumed).
@@ -292,7 +299,7 @@ class ICharset(interface.Interface):
         description=_("The charset name. This is what is used for the "
                       "'charset' parameter in content-type headers."),
         required=True,
-        )
+    )
 
     encoding = schema.ASCIILine(
         # This *must* match the `name` of the ICodec that's used to
@@ -300,7 +307,7 @@ class ICharset(interface.Interface):
         title=_('Encoding'),
         description=_("The id of the encoding used for this charset."),
         required=True,
-        )
+    )
 
 
 class ICodecPreferredCharset(interface.Interface):
@@ -310,6 +317,7 @@ class ICodecPreferredCharset(interface.Interface):
 class ICharsetCodec(interface.Interface):
     """Marker interface for locating the codec for a given charset."""
 
+
 class ICodecTerm(zope.schema.interfaces.ITitledTokenizedTerm):
     """Extended term that describes a content type interface."""
 
@@ -318,7 +326,7 @@ class ICodecTerm(zope.schema.interfaces.ITitledTokenizedTerm):
         description=_("Charset that should be used to represent the codec"),
         required=False,
         readonly=True,
-        )
+    )
 
 
 class ICodecSource(zope.schema.interfaces.IIterableSource):

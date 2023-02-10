@@ -21,9 +21,9 @@ from __future__ import print_function
 
 import unittest
 
-from zope import component
 from zope.testing import cleanup
 
+from zope import component
 from zope.mimetype.interfaces import ICodec
 from zope.mimetype.interfaces import ICodecTerm
 
@@ -40,12 +40,11 @@ class TestCodecTerms(cleanup.CleanUp,
         try:
             from zope.mimetype.source import CodecTerms
             from zope.mimetype.source import codecSource
-        except ImportError: # pragma: no cover
+        except ImportError:  # pragma: no cover
             raise unittest.SkipTest("Missing browser extra")
 
         return CodecTerms(source if source is not None else codecSource,
                           None)
-
 
     def setUp(self):
         from zope.configuration import xmlconfig
@@ -89,7 +88,6 @@ class TestCodecTerms(cleanup.CleanUp,
         self.assertEqual('Western (ISO-8859-1)', term.title)
 
         self.assertEqual('latin1', term.preferredCharset)
-
 
     def test_get_term_no_charset_registered(self):
         codec = component.getUtility(ICodec, 'utf-8')

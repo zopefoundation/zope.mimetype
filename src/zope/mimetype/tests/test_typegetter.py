@@ -30,7 +30,6 @@ class TestMimeTypeGuesser(unittest.TestCase):
         mimeType = typegetter.mimeTypeGuesser(data=b'<HTML')
         self.assertEqual('text/html', mimeType)
 
-
         mimeType = typegetter.mimeTypeGuesser(data=b'GIF89a')
         self.assertEqual('image/gif', mimeType)
 

@@ -19,17 +19,21 @@
 """Setup for zope.mimetype package
 """
 import os
-from setuptools import setup, find_packages
+
+from setuptools import find_packages
+from setuptools import setup
+
 
 def read(*rnames):
     with open(os.path.join(os.path.dirname(__file__), *rnames)) as f:
         return f.read()
 
+
 BROWSER_REQUIRES = [
-    'zope.browser', # ITerms in source.py
-    'zope.browserresource', # metaconfigure for icon in zcml.py
-    'zope.formlib>=4.0', # widget.py
-    'zope.publisher', # IBrowserRequest
+    'zope.browser',  # ITerms in source.py
+    'zope.browserresource',  # metaconfigure for icon in zcml.py
+    'zope.formlib>=4.0',  # widget.py
+    'zope.publisher',  # IBrowserRequest
 ]
 
 TEST_REQUIRES = BROWSER_REQUIRES + [
@@ -97,4 +101,4 @@ setup(name='zope.mimetype',
       test_suite='zope.mimetype.tests',
       include_package_data=True,
       zip_safe=False,
-)
+      )

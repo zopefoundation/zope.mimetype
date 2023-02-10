@@ -21,6 +21,7 @@ import unittest
 from zope.component import testing
 from zope.testing import renormalizing
 
+
 checker = renormalizing.RENormalizing([
     # Python 3 unicode removed the "u".
     (re.compile("u('.*?')"),
@@ -35,7 +36,8 @@ checker = renormalizing.RENormalizing([
     # Python 3 renames builtins.
     (re.compile("__builtin__"),
      r"builtins"),
-    ])
+])
+
 
 def optional_test_suite_setUp(required_module):
 
@@ -43,10 +45,13 @@ def optional_test_suite_setUp(required_module):
         import importlib
         try:
             importlib.import_module(required_module)
-        except ImportError: # pragma: no cover
-            raise unittest.SkipTest("Required module %r missing" % (required_module,))
+        except ImportError:  # pragma: no cover
+            raise unittest.SkipTest(
+                "Required module %r missing" %
+                (required_module,))
         testing.setUp(test)
     return setUp
+
 
 def test_suite():
     return unittest.TestSuite((
@@ -61,7 +66,8 @@ def test_suite():
             checker=checker),
         doctest.DocFileSuite(
             '../source.rst',
-            setUp=optional_test_suite_setUp('zope.browser'), tearDown=testing.tearDown,
+            setUp=optional_test_suite_setUp('zope.browser'),
+            tearDown=testing.tearDown,
             checker=checker),
         doctest.DocFileSuite(
             '../constraints.rst',
@@ -78,11 +84,12 @@ def test_suite():
             checker=checker),
         doctest.DocFileSuite(
             '../widget.rst',
-            setUp=optional_test_suite_setUp('zope.publisher'), tearDown=testing.tearDown,
+            setUp=optional_test_suite_setUp('zope.publisher'),
+            tearDown=testing.tearDown,
             checker=checker),
         doctest.DocFileSuite(
             '../codec.rst',
-            optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
+            optionflags=doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS,
             checker=checker,
         ),
         doctest.DocFileSuite(
@@ -91,9 +98,3 @@ def test_suite():
             checker=checker
         ),
     ))
-
-
-additional_tests = test_suite # for 'python setup.py test'
-
-if __name__ == '__main__': # pragma: no cover
-    unittest.main(defaultTest='test_suite')
