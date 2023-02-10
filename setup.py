@@ -12,7 +12,7 @@
 #
 ##############################################################################
 # This package is developed by the Zope Toolkit project, documented here:
-# http://docs.zope.org/zopetoolkit
+# https://zopetoolkit.readthedocs.io/
 # When developing and releasing this package, please follow the documented
 # Zope Toolkit policies as described by this documentation.
 ##############################################################################
@@ -44,7 +44,7 @@ TEST_REQUIRES = BROWSER_REQUIRES + [
 setup(name='zope.mimetype',
       version='3.0.dev0',
       author='Zope Foundation and Contributors',
-      author_email='zope-dev@zope.org',
+      author_email='zope-dev@zope.dev',
       description="A simple package for working with MIME content types",
       long_description=(
           read('README.rst')
@@ -76,6 +76,7 @@ setup(name='zope.mimetype',
       packages=find_packages('src'),
       package_dir={'': 'src'},
       namespace_packages=['zope'],
+      python_requires='>=3.7',
       extras_require={
           'test': TEST_REQUIRES,
           'browser': BROWSER_REQUIRES,
@@ -97,8 +98,6 @@ setup(name='zope.mimetype',
           'zope.schema',
           'zope.security',
       ],
-      tests_require=TEST_REQUIRES,
-      test_suite='zope.mimetype.tests',
       include_package_data=True,
       zip_safe=False,
       )

@@ -12,12 +12,7 @@
 ##############################################################################
 """Utility helpers
 """
-try:
-    from email.charset import Charset
-except ImportError:  # pragma: no cover
-    # Py2: Old name. (Note, on case-insensitive filesystems,
-    # we can import with either. This complicates coverage.)
-    from email.Charset import Charset
+from email.charset import Charset
 
 
 def decode(s, charset_name):

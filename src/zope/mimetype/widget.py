@@ -10,7 +10,6 @@ available for some of the titles.
 The implementation ignores these issues for now.
 
 """
-from __future__ import absolute_import
 
 
 __docformat__ = "reStructuredText"
@@ -23,7 +22,7 @@ class TranslatableSourceSelectWidget(
         zope.formlib.source.SourceSelectWidget):
 
     def __init__(self, field, source, request):
-        super(TranslatableSourceSelectWidget, self).__init__(
+        super().__init__(
             field, source, request)
         self.displays = {}   # value --> (display, token)
         self.order = []      # values in sorted order

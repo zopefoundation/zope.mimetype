@@ -10,7 +10,6 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-from __future__ import absolute_import
 
 import codecs
 import os
@@ -25,7 +24,7 @@ from zope.mimetype.interfaces import ICodecPreferredCharset
 
 
 @interface.implementer(ICodec)
-class Codec(object):
+class Codec:
 
     def __init__(self, name, title):
         self.name = name
@@ -43,7 +42,7 @@ def addCodec(name, title=None):
 
 
 @interface.implementer(ICharset)
-class Charset(object):
+class Charset:
 
     def __init__(self, name, encoding):
         self.name = name
@@ -82,9 +81,9 @@ def initialize(_context):
     _aliases = {}  # alias -> codec name
     here = os.path.dirname(os.path.abspath(__file__))
     fn = os.path.join(here, FILENAME)
-    f = open(fn, "r")
+    f = open(fn)
 
-    class Codec(object):
+    class Codec:
         preferred_alias = None
 
         def __init__(self, name):

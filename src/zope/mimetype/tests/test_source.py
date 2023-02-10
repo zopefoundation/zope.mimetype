@@ -15,9 +15,6 @@
 Tests for source.py.
 
 """
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import unittest
 
@@ -30,11 +27,6 @@ from zope.mimetype.interfaces import ICodecTerm
 
 class TestCodecTerms(cleanup.CleanUp,
                      unittest.TestCase):
-
-    # py2 bwc
-    assertRaisesRegex = getattr(unittest.TestCase,
-                                'assertRaisesRegex',
-                                unittest.TestCase.assertRaisesRegexp)
 
     def _make_codec_terms(self, source=None):
         try:
@@ -49,7 +41,7 @@ class TestCodecTerms(cleanup.CleanUp,
     def setUp(self):
         from zope.configuration import xmlconfig
 
-        super(TestCodecTerms, self).setUp()
+        super().setUp()
 
         xmlconfig.string("""
         <configure

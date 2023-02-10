@@ -90,7 +90,7 @@ store some UTF-8 data in a variable::
 
   >>> utf8_data = b"\xAB\xBB".decode("iso-8859-1").encode("utf-8")
   >>> utf8_data
-  '\xc2\xab\xc2\xbb'
+  b'\xc2\xab\xc2\xbb'
 
 We want to be able to decode the data using the `IContentInfo`
 object.  Let's try getting the corresponding `ICodec` object using
@@ -146,14 +146,14 @@ Now that that's been initialized, let's try getting the codec again::
   'utf-8'
 
   >>> codec.decode(utf8_data)
-  (u'\xab\xbb', 4)
+  ('\xab\xbb', 4)
 
 We can now check that the ``decode()`` method of the `IContentInfo` will
 decode the entire data, returning the Unicode representation of the
 text::
 
   >>> ci.decode(utf8_data)
-  u'\xab\xbb'
+  '\xab\xbb'
 
 Another possibilty, of course, is that you have content that you know
 is encoded text of some sort, but you don't actually know what

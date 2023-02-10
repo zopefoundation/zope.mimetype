@@ -9,6 +9,8 @@
 
 - Drop support for Python 2.7, 3.5, 3.6.
 
+- Drop support for deprecated ``python setup.py test``.
+
 
 2.5.1 (2021-04-15)
 ==================

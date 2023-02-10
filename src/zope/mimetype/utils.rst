@@ -18,7 +18,7 @@ that were not in the range of the codec associated with the character set).
     >>> charset = 'Latin-7' # Baltic Rim or iso-8859-13
     >>> from zope.mimetype import utils
     >>> utils.decode(original, charset)
-    u'This is an o with a slash through it: \xf8.'
+    'This is an o with a slash through it: \xf8.'
     >>> utils.decode(original, 'foo bar baz')
     Traceback (most recent call last):
     ...

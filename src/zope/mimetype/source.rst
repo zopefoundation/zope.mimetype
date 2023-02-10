@@ -77,7 +77,7 @@ The term also provides the title based on the "title" tagged value
 from the interface::
 
   >>> t.title
-  u'Type One'
+  'Type One'
 
 Each interface provides a list of MIME types with which the interface
 is associated.  The term object provides access to this list::

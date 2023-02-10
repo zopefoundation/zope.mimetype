@@ -26,7 +26,7 @@ import zope.mimetype.interfaces
 
 # Base classes
 
-class UtilitySource(object):
+class UtilitySource:
     """Source of utilities providing a specific interface."""
 
     def __init__(self):
@@ -61,7 +61,7 @@ class UtilitySource(object):
 
 
 @zope.interface.implementer(ITerms)
-class Terms(object):
+class Terms:
     """Utility to provide terms for content type interfaces."""
 
     def __init__(self, source, request):
@@ -106,14 +106,14 @@ class ContentTypeTerms(Terms):
 
 
 @zope.interface.implementer(zope.mimetype.interfaces.IContentTypeTerm)
-class ContentTypeTerm(object):
+class ContentTypeTerm:
 
     def __init__(self, interface):
         self.value = interface
 
     @property
     def token(self):
-        return "%s.%s" % (self.value.__module__, self.value.__name__)
+        return "{}.{}".format(self.value.__module__, self.value.__name__)
 
     @property
     def title(self):
@@ -160,7 +160,7 @@ class CodecTerms(Terms):
 
 
 @zope.interface.implementer(zope.mimetype.interfaces.ICodecTerm)
-class CodecTerm(object):
+class CodecTerm:
 
     def __init__(self, codec):
         self.value = codec

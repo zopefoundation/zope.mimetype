@@ -77,7 +77,7 @@ on the event set to `None`::
   >>> event.changeContentType(obj, ITextPlain)
   changed content type interface:
     from: None
-      to: <InterfaceClass __builtin__.ITextPlain>
+      to: <InterfaceClass builtins.ITextPlain>
 
 Calling the `~.changeContentType()` function again with the same "new"
 content type interface causes no change, so the event is not fired
@@ -89,13 +89,13 @@ Providing a new interface does cause the event to be fired again::
 
   >>> event.changeContentType(obj, IOctetStream)
   changed content type interface:
-    from: <InterfaceClass __builtin__.ITextPlain>
-      to: <InterfaceClass __builtin__.IOctetStream>
+    from: <InterfaceClass builtins.ITextPlain>
+      to: <InterfaceClass builtins.IOctetStream>
 
 Similarly, removing the content type interface triggers the event as
 well::
 
   >>> event.changeContentType(obj, None)
   changed content type interface:
-    from: <InterfaceClass __builtin__.IOctetStream>
+    from: <InterfaceClass builtins.IOctetStream>
       to: None

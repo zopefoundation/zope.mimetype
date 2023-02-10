@@ -27,7 +27,7 @@ import zope.mimetype.interfaces
 class ContentTypeChangedEvent(zope.interface.interfaces.ObjectEvent):
 
     def __init__(self, object, oldContentType, newContentType):
-        super(ContentTypeChangedEvent, self).__init__(object)
+        super().__init__(object)
         self.newContentType = newContentType
         self.oldContentType = oldContentType
 

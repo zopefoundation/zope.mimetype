@@ -15,9 +15,6 @@
 Tests for zcml.py
 
 """
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import unittest
 
@@ -69,9 +66,9 @@ class TestMimeTypesDirective(cleanup.CleanUp,
                 xmlns="http://namespaces.zope.org/zope"
                 i18n_domain="zope.mimetype">
               <include package="zope.mimetype" file="meta.zcml" />
-              <mimeTypes file='%s' module="zope_mime_testing" />
+              <mimeTypes file='{}' module="zope_mime_testing" />
             </configure>
-            """ % (path,))
+            """.format(path))
         finally:
             del sys.modules[fake_module.__name__]
 

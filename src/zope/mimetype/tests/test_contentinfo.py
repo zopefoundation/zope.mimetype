@@ -15,9 +15,6 @@
 Tests for contentinfo.py
 
 """
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import unittest
 
@@ -38,11 +35,11 @@ class TestContentinfo(cleanup.CleanUp,
         from zope.mimetype.interfaces import IContentTypeAware
 
         @interface.implementer(IContentTypeAware)
-        class Content(object):
+        class Content:
             mimeType = 'text/plain'
             parameters = ()
 
-        class Codec(object):
+        class Codec:
             def decode(self, s):
                 return '', 0
 

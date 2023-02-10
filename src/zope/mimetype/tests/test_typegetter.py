@@ -10,7 +10,6 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-from __future__ import absolute_import
 
 import unittest
 
@@ -20,7 +19,7 @@ from zope.mimetype import typegetter
 class TestMimeTypeGuesser(unittest.TestCase):
 
     def test_bytes_data_and_no_mime_type_or_name(self):
-        # Python 3: bytes data and no content type but something that
+        # bytes data and no content type but something that
         # looked like html used to cause a TypeError
         # Similar to https://github.com/zopefoundation/zope.mimetype/issues/6
 
@@ -44,7 +43,7 @@ class TestMimeTypeGuesser(unittest.TestCase):
 class TestSmartMimeTypeGuesser(unittest.TestCase):
 
     def test_bytes_and_text_html_type_error(self):
-        # Python 3: bytes data and text/html content type
+        # bytes data and text/html content type
         # used to cause a TypeError
         # https://github.com/zopefoundation/zope.mimetype/issues/6
 

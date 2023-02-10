@@ -134,7 +134,7 @@ class ICharsetDirective(interface.Interface):
     )
 
 
-class CodecDirective(object):
+class CodecDirective:
     def __init__(self, _context, name, title):
         self.name = name
         self.title = title

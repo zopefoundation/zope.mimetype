@@ -24,7 +24,7 @@ import zope.mimetype.interfaces
 
 @zope.interface.implementer(zope.mimetype.interfaces.IContentInfo)
 @zope.component.adapter(zope.interface.Interface)
-class ContentInfo(object):
+class ContentInfo:
     """Basic IContentInfo that provides information from an IContentTypeAware.
     """
 

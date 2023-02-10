@@ -39,7 +39,7 @@ from zope.mimetype.i18n import _
 # http://www.faqs.org/rfcs/rfc2045.html
 _token_re = r"[!#$%&'*+\-.\d^_`a-z{|}~]+"
 _token_rx = re.compile("%s$" % _token_re)
-_mime_type_rx = re.compile("%s/%s$" % (_token_re, _token_re))
+_mime_type_rx = re.compile("{}/{}$".format(_token_re, _token_re))
 
 
 # These helpers are used to define constraints for specific schema
