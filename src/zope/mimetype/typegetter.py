@@ -11,16 +11,17 @@
 #
 ##############################################################################
 
+import codecs
 # There's a zope.contenttype module that exports a similar API,
 # but that's pretty hueristic.  Some of this should perhaps be folded
 # back into that, or this package could provide a replacement.
 #
 import mimetypes
-import codecs
+
+import zope.contenttype.parse
 
 from zope import interface
 from zope.mimetype import interfaces
-import zope.contenttype.parse
 
 
 def mimeTypeGetter(name=None, data=None, content_type=None):
@@ -34,9 +35,10 @@ def mimeTypeGetter(name=None, data=None, content_type=None):
         except ValueError:
             pass
         else:
-            return "%s/%s" % (major, minor)
+            return "{}/{}".format(major, minor)
 
     return None
+
 
 interface.directlyProvides(mimeTypeGetter, interfaces.IMimeTypeGetter)
 
@@ -70,6 +72,7 @@ def mimeTypeGuesser(name=None, data=None, content_type=None):
 
     return mimeType
 
+
 interface.directlyProvides(mimeTypeGuesser, interfaces.IMimeTypeGetter)
 
 
@@ -92,6 +95,7 @@ def smartMimeTypeGuesser(name=None, data=None, content_type=None):
 
     return mimeType
 
+
 interface.directlyProvides(smartMimeTypeGuesser, interfaces.IMimeTypeGetter)
 
 
@@ -100,20 +104,20 @@ interface.directlyProvides(smartMimeTypeGuesser, interfaces.IMimeTypeGetter)
 #
 _xml_prefix_table = (
     # prefix, mimeType, charset
-    (b"<?xml",                   "text/xml",     None),
-    (b"\xef\xbb\xbf<?xml",       "text/xml",     "utf-8"),    # w/ BOM
-    (b"\0<\0?\0x\0m\0l",         "text/xml",     "utf-16be"),
-    (b"<\0?\0x\0m\0l\0",         "text/xml",     "utf-16le"),
-    (b"\xfe\xff\0<\0?\0x\0m\0l", "text/xml",     "utf-16be"), # w/ BOM
-    (b"\xff\xfe<\0?\0x\0m\0l\0", "text/xml",     "utf-16le"), # w/ BOM
-    )
+    (b"<?xml", "text/xml", None),
+    (b"\xef\xbb\xbf<?xml", "text/xml", "utf-8"),    # w/ BOM
+    (b"\0<\0?\0x\0m\0l", "text/xml", "utf-16be"),
+    (b"<\0?\0x\0m\0l\0", "text/xml", "utf-16le"),
+    (b"\xfe\xff\0<\0?\0x\0m\0l", "text/xml", "utf-16be"),  # w/ BOM
+    (b"\xff\xfe<\0?\0x\0m\0l\0", "text/xml", "utf-16le"),  # w/ BOM
+)
 _prefix_table = _xml_prefix_table + (
-    (b"<html",                   "text/html",    None),
-    (b"<HTML",                   "text/html",    None),
-    (b"GIF89a",                  "image/gif",    None),
+    (b"<html", "text/html", None),
+    (b"<HTML", "text/html", None),
+    (b"GIF89a", "image/gif", None),
     # PNG Signature: bytes 137 80 78 71 13 10 26 10
-    (b"\x89PNG\r\n\x1a\n",       "image/png",    None),
-    )
+    (b"\x89PNG\r\n\x1a\n", "image/png", None),
+)
 
 
 def charsetGetter(name=None, data=None, content_type=None):
@@ -143,5 +147,6 @@ def charsetGetter(name=None, data=None, content_type=None):
             except UnicodeDecodeError:
                 pass
     return None
+
 
 interface.directlyProvides(charsetGetter, interfaces.ICharsetGetter)

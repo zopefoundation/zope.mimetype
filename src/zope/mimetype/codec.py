@@ -10,28 +10,30 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-from __future__ import absolute_import
 
 import codecs
 import os
 import re
 
-from zope import interface, component
-from zope.mimetype.interfaces import ICodec, ICharsetCodec
-from zope.mimetype.interfaces import ICharset, ICodecPreferredCharset
+from zope import component
+from zope import interface
+from zope.mimetype.interfaces import ICharset
+from zope.mimetype.interfaces import ICharsetCodec
+from zope.mimetype.interfaces import ICodec
+from zope.mimetype.interfaces import ICodecPreferredCharset
 
 
 @interface.implementer(ICodec)
-class Codec(object):
+class Codec:
 
     def __init__(self, name, title):
         self.name = name
         self.title = title
-        ( self.encode,
-          self.decode,
-          self.reader,
-          self.writer
-          ) = codecs.lookup(name)
+        (self.encode,
+         self.decode,
+         self.reader,
+         self.writer
+         ) = codecs.lookup(name)
 
 
 def addCodec(name, title=None):
@@ -40,7 +42,7 @@ def addCodec(name, title=None):
 
 
 @interface.implementer(ICharset)
-class Charset(object):
+class Charset:
 
     def __init__(self, name, encoding):
         self.name = name
@@ -67,7 +69,8 @@ FILENAME = "character-sets.txt"
 
 DATA_RE = re.compile(
     r'(Name|Alias|MIBenum):\s*(\S+)\s*(\(preferred MIME name\))?'
-    )
+)
+
 
 def initialize(_context):
     # if any ICodec has been registered, we're done:
@@ -75,12 +78,12 @@ def initialize(_context):
         return
     _names = []
     _codecs = {}
-    _aliases = {} # alias -> codec name
+    _aliases = {}  # alias -> codec name
     here = os.path.dirname(os.path.abspath(__file__))
     fn = os.path.join(here, FILENAME)
-    f = open(fn, "r")
+    f = open(fn)
 
-    class Codec(object):
+    class Codec:
         preferred_alias = None
 
         def __init__(self, name):
@@ -107,7 +110,7 @@ def initialize(_context):
 
         type, name, preferred = m.groups()
         if type == "Name":
-            if name in _codecs: # pragma: no cover (its our datafile, this shouldn't happen)
+            if name in _codecs:  # pragma: no cover
                 raise ValueError("codec %s already exists" % name)
             _names.append(name)
             lastname = name
@@ -116,10 +119,10 @@ def initialize(_context):
                 _codecs[name].preferred_alias = name.lower()
 
         elif type == "Alias" and name != "None":
-            if not lastname: # pragma: no cover (its our datafile, this shouldn't happen)
+            if not lastname:  # pragma: no cover
                 raise ValueError("Parsing failed. Alias found without a name.")
             name = name.lower()
-            if name in _aliases: # pragma: no cover (its our datafile, this shouldn't happen)
+            if name in _aliases:  # pragma: no cover
                 raise ValueError("Alias %s already exists." % name)
             codec = _codecs[lastname]
             codec.aliases.append(name)
@@ -138,12 +141,12 @@ def initialize(_context):
                 if pyName in codec.pyCodecs:
                     break
             else:
-                continue # not found under any name
+                continue  # not found under any name
         _context.action(
             discriminator=None,
             callable=addCodec,
             args=(pyName, codec.name),
-            )
+        )
         if not codec.preferred_alias:
             codec.preferred_alias = codec.aliases[0]
         for alias in codec.aliases:
@@ -151,4 +154,4 @@ def initialize(_context):
                 discriminator=(pyName, alias),
                 callable=addCharset,
                 args=(pyName, alias, alias == codec.preferred_alias)
-                )
+            )

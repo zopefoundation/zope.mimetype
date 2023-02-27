@@ -12,19 +12,24 @@
 ##############################################################################
 """Mime-Types management
 """
-import os
 import csv
+import os
+
 import zope.interface
 from zope.component import provideUtility
 from zope.interface.interface import InterfaceClass
-from zope.mimetype.interfaces import IContentType, IContentTypeEncoded
-from zope.mimetype.interfaces import IContentTypeInterface
+
 from zope.mimetype.i18n import _
+from zope.mimetype.interfaces import IContentType
+from zope.mimetype.interfaces import IContentTypeEncoded
+from zope.mimetype.interfaces import IContentTypeInterface
+
 
 def read(file_name):
     file = open(file_name)
     result = {}
-    for name, title, extensions, mime_types, icon_name, encoded in csv.reader(file):
+    for name, title, extensions, mime_types, icon_name, encoded in csv.reader(
+            file):
         extensions = extensions.split()
         mime_types = mime_types.split()
         encoded = (encoded.strip().lower() == 'yes')
@@ -32,6 +37,7 @@ def read(file_name):
                         icon_name.strip(), encoded)
     file.close()
     return result
+
 
 def getInterfaces(data, module=None):
     results = {}
@@ -46,13 +52,14 @@ def getInterfaces(data, module=None):
         results[name] = interface
     return results
 
+
 def makeInterface(name, info, module):
     title, extensions, mime_types, icon_name, encoded = info
     if encoded:
         base = IContentTypeEncoded
     else:
         base = IContentType
-    interface = InterfaceClass(name, bases=(base,),  __module__=module)
+    interface = InterfaceClass(name, bases=(base,), __module__=module)
     zope.interface.directlyProvides(interface, IContentTypeInterface)
     interface.setTaggedValue('extensions', extensions)
     interface.setTaggedValue('mimeTypes', mime_types)
@@ -69,6 +76,7 @@ def registerUtilities(interfaces, data):
 
 here = os.path.dirname(os.path.abspath(__file__))
 types_data = os.path.join(here, "types.csv")
+
 
 def setup():
     data = read(types_data)

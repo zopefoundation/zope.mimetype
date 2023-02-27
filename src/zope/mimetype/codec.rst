@@ -63,8 +63,8 @@ Preferred charsets are registered as utilities for
    >>> preferred.name
    'iso8859-1'
    >>> sorted(component.getUtilitiesFor(ICodecPreferredCharset))
-   [(u'iso8859-1', <zope.mimetype.codec.Charset ...>),
-    (u'utf-8', <zope.mimetype.codec.Charset ...>)]
+   [('iso8859-1', <zope.mimetype.codec.Charset ...>),
+    ('utf-8', <zope.mimetype.codec.Charset ...>)]
 
 We can look up a codec by the name of its charset:
 
@@ -76,7 +76,7 @@ We can look up a codec by the name of its charset:
 Or we can look up all codecs:
 
    >>> sorted(component.getUtilitiesFor(ICharsetCodec))
-   [(u'iso8859-1', <zope.mimetype.codec.Codec ...>),
-    (u'latin1', <zope.mimetype.codec.Codec ...>),
-    (u'test', <zope.mimetype.codec.Codec ...>),
-    (u'utf-8', <zope.mimetype.codec.Codec ...>)]
+   [('iso8859-1', <zope.mimetype.codec.Codec ...>),
+    ('latin1', <zope.mimetype.codec.Codec ...>),
+    ('test', <zope.mimetype.codec.Codec ...>),
+    ('utf-8', <zope.mimetype.codec.Codec ...>)]

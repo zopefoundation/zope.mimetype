@@ -17,15 +17,16 @@ __docformat__ = "reStructuredText"
 
 import sys
 
-from zope.browser.interfaces import ITerms
 import zope.component
-import zope.mimetype.interfaces
 import zope.publisher.interfaces.browser
+from zope.browser.interfaces import ITerms
+
+import zope.mimetype.interfaces
 
 
 # Base classes
 
-class UtilitySource(object):
+class UtilitySource:
     """Source of utilities providing a specific interface."""
 
     def __init__(self):
@@ -35,7 +36,7 @@ class UtilitySource(object):
         ok = self._interface.providedBy(value)
         if ok:
             for name, interface in zope.component.getUtilitiesFor(
-                self._interface):
+                    self._interface):
                 if interface is value:
                     return True
         return False
@@ -47,7 +48,7 @@ class UtilitySource(object):
         # haven't been iterated over all the way yet, go ahead and
         # build the cached results list
         for name, interface in zope.component.getUtilitiesFor(
-            self._interface):
+                self._interface):
             if interface not in seen:
                 seen.add(interface)
                 yield interface
@@ -60,7 +61,7 @@ class UtilitySource(object):
 
 
 @zope.interface.implementer(ITerms)
-class Terms(object):
+class Terms:
     """Utility to provide terms for content type interfaces."""
 
     def __init__(self, source, request):
@@ -83,8 +84,8 @@ class ContentTypeSource(UtilitySource):
 
 
 @zope.component.adapter(
-        zope.mimetype.interfaces.IContentTypeSource,
-        zope.publisher.interfaces.browser.IBrowserRequest)
+    zope.mimetype.interfaces.IContentTypeSource,
+    zope.publisher.interfaces.browser.IBrowserRequest)
 class ContentTypeTerms(Terms):
     """Utility to provide terms for content type interfaces."""
 
@@ -105,14 +106,14 @@ class ContentTypeTerms(Terms):
 
 
 @zope.interface.implementer(zope.mimetype.interfaces.IContentTypeTerm)
-class ContentTypeTerm(object):
+class ContentTypeTerm:
 
     def __init__(self, interface):
         self.value = interface
 
     @property
     def token(self):
-        return "%s.%s" % (self.value.__module__, self.value.__name__)
+        return "{}.{}".format(self.value.__module__, self.value.__name__)
 
     @property
     def title(self):
@@ -140,8 +141,8 @@ class CodecSource(UtilitySource):
 
 
 @zope.component.adapter(
-        zope.mimetype.interfaces.ICodecSource,
-        zope.publisher.interfaces.browser.IBrowserRequest)
+    zope.mimetype.interfaces.ICodecSource,
+    zope.publisher.interfaces.browser.IBrowserRequest)
 class CodecTerms(Terms):
     """Utility to provide terms for codecs."""
 
@@ -159,7 +160,7 @@ class CodecTerms(Terms):
 
 
 @zope.interface.implementer(zope.mimetype.interfaces.ICodecTerm)
-class CodecTerm(object):
+class CodecTerm:
 
     def __init__(self, codec):
         self.value = codec

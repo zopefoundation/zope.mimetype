@@ -18,14 +18,16 @@ __docformat__ = "reStructuredText"
 import zope.component
 import zope.contenttype.parse
 import zope.interface
+
 import zope.mimetype.interfaces
 
 
 @zope.interface.implementer(zope.mimetype.interfaces.IContentInfo)
 @zope.component.adapter(zope.interface.Interface)
-class ContentInfo(object):
+class ContentInfo:
     """Basic IContentInfo that provides information from an IContentTypeAware.
     """
+
     def __init__(self, context):
         self.context = context
         aware = zope.mimetype.interfaces.IContentTypeAware(context)

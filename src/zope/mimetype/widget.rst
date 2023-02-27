@@ -77,7 +77,7 @@ a widget.
     <input name="field.dog-empty-marker" type="hidden" value="1" />
     </div>
     >>> widget.textForValue(widget.vocabulary.terms.getTerm('spot'))
-    (u'spot', 'c3BvdA==')
+    ('spot', 'c3BvdA==')
 
 Note that the options are ordered alphabetically.
 
