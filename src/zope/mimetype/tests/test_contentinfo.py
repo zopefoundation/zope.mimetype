@@ -26,10 +26,6 @@ from zope.mimetype.contentinfo import ContentInfo
 
 class TestContentinfo(cleanup.CleanUp,
                       unittest.TestCase):
-    # py2 bwc
-    assertRaisesRegex = getattr(unittest.TestCase,
-                                'assertRaisesRegex',
-                                unittest.TestCase.assertRaisesRegexp)
 
     def test_codec_cant_decode_all(self):
         from zope.mimetype.interfaces import IContentTypeAware
