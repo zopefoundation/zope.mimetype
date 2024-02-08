@@ -1,3 +1,4 @@
 Sphinx
+sphinx_rtd_theme >= 2
 repoze.sphinx.autointerface
 zope.mimetype
