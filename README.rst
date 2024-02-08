@@ -9,8 +9,8 @@ zope.mimetype
         :target: https://pypi.org/project/zope.mimetype/
         :alt: Supported Python versions
 
-.. image:: https://travis-ci.com/zopefoundation/zope.mimetype.svg?branch=master
-        :target: https://travis-ci.com/zopefoundation/zope.mimetype
+.. image:: https://github.com/zopefoundation/zope.mimetype/actions/workflows/tests.yml/badge.svg
+        :target: https://github.com/zopefoundation/zope.mimetype/actions/workflows/tests.yml
 
 .. image:: https://coveralls.io/repos/github/zopefoundation/zope.mimetype/badge.svg?branch=master
         :target: https://coveralls.io/github/zopefoundation/zope.mimetype?branch=master
