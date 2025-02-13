@@ -32,7 +32,7 @@ class TestCodecTerms(cleanup.CleanUp,
         try:
             from zope.mimetype.source import CodecTerms
             from zope.mimetype.source import codecSource
-        except ImportError:  # pragma: no cover
+        except ModuleNotFoundError:  # pragma: no cover
             raise unittest.SkipTest("Missing browser extra")
 
         return CodecTerms(source if source is not None else codecSource,

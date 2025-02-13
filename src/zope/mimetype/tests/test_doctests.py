@@ -25,7 +25,7 @@ def optional_test_suite_setUp(required_module):
         import importlib
         try:
             importlib.import_module(required_module)
-        except ImportError:  # pragma: no cover
+        except ModuleNotFoundError:  # pragma: no cover
             raise unittest.SkipTest(
                 "Required module %r missing" %
                 (required_module,))

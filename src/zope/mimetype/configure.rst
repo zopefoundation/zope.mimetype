@@ -21,7 +21,7 @@ is available:
 
   >>> try:
   ...    import zope.browserresource
-  ... except ImportError:
+  ... except ModuleNotFoundError:
   ...    expected = 1
   ... else:
   ...    expected = 107
