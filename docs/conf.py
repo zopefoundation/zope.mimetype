@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # zope.mimetype documentation build configuration file, created by
 # sphinx-quickstart on Thu Jun  8 07:02:25 2017.
@@ -21,7 +20,10 @@
 # sys.path.insert(0, os.path.abspath('.'))
 import os
 import sys
+
 import pkg_resources
+
+
 # Use the python versions instead of the cython compiled versions
 # for better documentation extraction and ease of tweaking docs.
 os.environ['PURE_PYTHON'] = '1'
@@ -58,9 +60,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'zope.mimetype'
-copyright = u'2017, Zope Foundation contributors'
-author = u'Zope Foundation contributors'
+project = 'zope.mimetype'
+copyright = '2017, Zope Foundation contributors'
+author = 'Zope Foundation contributors'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -83,7 +85,8 @@ language = 'en'
 # This patterns also effect to html_static_path and html_extra_path
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
-# The reST default role (used for this markup: `text`) to use for all documents.
+# The reST default role (used for this markup: `text`) to use for all
+# documents.
 default_role = 'obj'
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
@@ -149,8 +152,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'zopemimetype.tex', u'zope.mimetype Documentation',
-     u'NextThought', 'manual'),
+    (master_doc, 'zopemimetype.tex', 'zope.mimetype Documentation',
+     'NextThought', 'manual'),
 ]
 
 
@@ -159,7 +162,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'zopemimetype', u'zope.mimetype Documentation',
+    (master_doc, 'zopemimetype', 'zope.mimetype Documentation',
      [author], 1)
 ]
 
@@ -170,7 +173,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'zopemimetype', u'zope.mimetype Documentation',
+    (master_doc, 'zopemimetype', 'zope.mimetype Documentation',
      author, 'zopemimetype', 'One line description of project.',
      'Miscellaneous'),
 ]

@@ -35,7 +35,7 @@ def mimeTypeGetter(name=None, data=None, content_type=None):
         except ValueError:
             pass
         else:
-            return "{}/{}".format(major, minor)
+            return f"{major}/{minor}"
 
     return None
 

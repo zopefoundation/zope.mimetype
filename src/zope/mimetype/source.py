@@ -94,7 +94,7 @@ class ContentTypeTerms(Terms):
         if module not in sys.modules:
             try:
                 __import__(module)
-            except ImportError:
+            except ModuleNotFoundError:
                 raise LookupError("could not import module for token")
         interface = getattr(sys.modules[module], name)
         if interface in self.context:
@@ -113,7 +113,7 @@ class ContentTypeTerm:
 
     @property
     def token(self):
-        return "{}.{}".format(self.value.__module__, self.value.__name__)
+        return f"{self.value.__module__}.{self.value.__name__}"
 
     @property
     def title(self):

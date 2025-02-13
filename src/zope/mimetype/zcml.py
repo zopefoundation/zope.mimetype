@@ -25,7 +25,7 @@ from zope.mimetype.i18n import _
 
 try:
     from zope.browserresource.metaconfigure import icon
-except ImportError:  # pragma: no cover
+except ModuleNotFoundError:  # pragma: no cover
     def icon(*args):
         import warnings
         warnings.warn("No icon support: zope.browserresource is not installed")
