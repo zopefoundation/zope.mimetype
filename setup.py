@@ -20,7 +20,6 @@
 """
 import os
 
-from setuptools import find_packages
 from setuptools import setup
 
 
@@ -38,11 +37,11 @@ BROWSER_REQUIRES = [
 
 TEST_REQUIRES = BROWSER_REQUIRES + [
     'zope.testing',
-    'zope.testrunner',
+    'zope.testrunner >= 6.4',
 ]
 
 setup(name='zope.mimetype',
-      version='3.3.dev0',
+      version='4.0.dev0',
       author='Zope Foundation and Contributors',
       author_email='zope-dev@zope.dev',
       description="A simple package for working with MIME content types",
@@ -73,9 +72,6 @@ setup(name='zope.mimetype',
       ],
       url='https://github.com/zopefoundation/zope.mimetype',
       license='ZPL-2.1',
-      packages=find_packages('src'),
-      package_dir={'': 'src'},
-      namespace_packages=['zope'],
       python_requires='>=3.9',
       extras_require={
           'test': TEST_REQUIRES,
