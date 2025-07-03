@@ -42,7 +42,7 @@ TEST_REQUIRES = BROWSER_REQUIRES + [
 ]
 
 setup(name='zope.mimetype',
-      version='3.2.dev0',
+      version='3.2',
       author='Zope Foundation and Contributors',
       author_email='zope-dev@zope.dev',
       description="A simple package for working with MIME content types",
