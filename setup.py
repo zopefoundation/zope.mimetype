@@ -35,7 +35,11 @@ BROWSER_REQUIRES = [
     'zope.publisher',  # IBrowserRequest
 ]
 
-TEST_REQUIRES = BROWSER_REQUIRES + [
+TEST_REQUIRES = [
+    'zope.browser',  # ITerms in source.py
+    'zope.browserresource',  # metaconfigure for icon in zcml.py
+    'zope.formlib>=4.0',  # widget.py
+    'zope.publisher',  # IBrowserRequest
     'zope.testing',
     'zope.testrunner >= 6.4',
 ]
@@ -80,7 +84,11 @@ setup(name='zope.mimetype',
               'Sphinx',
               'sphinx_rtd_theme',
               'repoze.sphinx.autointerface',
-          ] + BROWSER_REQUIRES,
+              'zope.browser',  # ITerms in source.py
+              'zope.browserresource',  # metaconfigure for icon in zcml.py
+              'zope.formlib>=4.0',  # widget.py
+              'zope.publisher',  # IBrowserRequest
+          ],
       },
       install_requires=[
           'setuptools',
