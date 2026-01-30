@@ -11,6 +11,7 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+import importlib.metadata
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -20,8 +21,7 @@
 # sys.path.insert(0, os.path.abspath('.'))
 import os
 import sys
-
-import pkg_resources
+from datetime import datetime
 
 
 # Use the python versions instead of the cython compiled versions
@@ -29,7 +29,7 @@ import pkg_resources
 os.environ['PURE_PYTHON'] = '1'
 
 sys.path.append(os.path.abspath('../src'))
-rqmt = pkg_resources.require('zope.mimetype')[0]
+rqmt = importlib.metadata.distribution('zope.mimetype')
 
 # -- General configuration ------------------------------------------------
 
@@ -61,7 +61,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'zope.mimetype'
-copyright = '2017, Zope Foundation contributors'
+copyright = f'2017-{datetime.now().year}, Zope Foundation contributors'
 author = 'Zope Foundation contributors'
 
 # The version info for the project you're documenting, acts as replacement for
