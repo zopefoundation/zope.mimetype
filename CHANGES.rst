@@ -9,6 +9,9 @@
 
 - Add support for Python 3.14.
 
+- Fix ``utils.rst`` doctest on Python 3.15 where ``iso-ir-6`` no longer
+  resolves to an input codec in ``email.charset``.
+
 - Drop support for Python 3.9.
 
 
