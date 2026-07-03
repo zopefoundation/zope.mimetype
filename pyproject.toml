@@ -9,7 +9,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "zope.mimetype"
-version = "4.1.dev0"
+version = "4.1"
 description = "A simple package for working with MIME content types"
 license = "ZPL-2.1"
 classifiers = [
