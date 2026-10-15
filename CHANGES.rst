@@ -5,7 +5,9 @@
 4.2 (unreleased)
 ================
 
-- Nothing changed yet.
+- Add support for Python 3.15.
+
+- Drop support for Python 3.10.
 
 
 4.1 (2026-07-03)

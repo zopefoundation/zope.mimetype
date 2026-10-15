@@ -12,7 +12,7 @@
 
       <meta:subdirective
           name="charset"
-          schema=".zcml.ICharsetDirective" 
+          schema=".zcml.ICharsetDirective"
           />
 
     </meta:complexDirective>
